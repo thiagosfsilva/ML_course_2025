@@ -1,0 +1,70 @@
+---
+title: "Informações Pré-Curso"
+format: html
+---
+
+Bem vindos à primeira edição do curso "Análise preditiva de dados ambientais e geoespacias em R"! O objetivo desse curso é estabelecer uma base teórica e prática inicial para que vocês possam incorporar o aprendizado de máquina (*machine learning*) à sua caixa de ferramentas de pesquisa. Esse curso certamente não irá tornar ninguém um expert - a ideia pricipal é fornecer o mínimo de fundamentos para que vocês possam continuar sua jornada de aprendizado de maneira independente.
+
+Abaixo, algumas informações sobre o curso, e também informações importantes para preparação **pré-curso**, incluindo instalação de software, pacotes, etc.
+
+## Pré-requisitos:
+
+Familiaridade básica com programação em R. Essa familiaridade pode ser obtida completando o seguinte vídeo-curso online gratuito: <https://didatica.tech/curso-de-r-online-para-iniciantes/> ou completando os capítulos ‘Pré-Requisitos’e ‘Introdução ao R’ deste livro online gratuito: <https://mauriciovancine.github.io/publications/eco-r/.>
+
+## Locais,datas, horas:
+
+*Dia 09/12*
+
+14:00-17:00h: Auditório do Curso de Biologia
+
+*Dias 10-12/12 e 15-19/12*
+ 
+A ser determinado
+
+## Programa (sujeito à mudança):
+
+-   Dia 1: Introdução à ciência de dados
+
+-   Dia 2: Pré-processamento e visualização de dados tabulares.
+
+-   Dia 3 Introdução à modelagem: revisitando os modelos de regressão múltipla sob a ótica de predição.
+
+-   Dia 4: Aprendizado de dados aplicado à modelagem preditiva com dados tabulares.
+
+-   Dia 5: Visualização e gerenciamento de dados geoespaciais.
+
+-   Dia 6: Aprendizado de dados aplicado à modelagem preditiva com dados geoespaciais            (classificação de uso e cobertura da terra / modelagem quantitativa).
+
+-   Dia 7: Prática guiada em modelagem preditiva de dados.
+
+-   Dia 8: Trabalho supervisionado em projeto independente de modelagem preditiva de dados.
+
+-   Dia 9: Apresentação de projetos e discussão, encerramento do curso.
+
+**Referências Bibliográficas**
+
+Da Silva FR, Gonçalves-Souza T, Paterno GB, Provete DB, Vancine MH (2022). Análises ecológicas no R. Nupeea, Recife, PE, Primeira edição. ISBN 9788579175640. <https://canal6.com.br/livreacesso/livro/analises-ecologicas-no-r/>
+
+Wickham H, Çetinkaya-Rundel M, Grolemund G (2023) R for Data Science. O'Reilly Media, Inc. 2nd Edition. ISBN: 9781492097402 <https://r4ds.hadley.nz/>
+
+Lovelace R, Nowosad J, Muenchow J (2025). Geocomputation with R. The R Series. CRC Press. ISBN: 1032248882 <https://r.geocompx.org/>
+
+Kuhn M, Silge J (2023). Tidy modelling with R: A Framework for Modeling in the Tidyverse. O'Reilly Media, Inc. 1st Edition. ISBN:1492096482. <https://www.tmwr.org/>
+
+## Preparação Pré-Curso:
+
+-   Instalar o R versão 4.5.2: <https://www.r-project.org/> . (**Atenção:** se você está atualmente usando uma versão anterior do R para análises no seu projeto, recomendo instalar a versão 4.5.2 sem remover sua versão atual - para garantir que nenhuma incomplatibilidade de versão seja introduzida e afete o seu trabalho).
+
+-   Instalar/atualizar o RStudio para a versão 2025.09.2 Build 418: <https://posit.co/download/rstudio-desktop/>
+
+-   Instalar os pacotes abaixo (copiar e colar o comando em um script):
+
+```{r install, eval=FALSE}
+install.packages('terra','raster','sf','sp','mapview',
+                 'tidyverse','tidymodels','ranger',
+                 'xgboost','lightgbm','kernlab','rpart')
+```
+
+## Material
+
+A versão mais recente do material deste curso ficará disponível em: <https://github.com/thiagosfsilva/ML_course_2025> .

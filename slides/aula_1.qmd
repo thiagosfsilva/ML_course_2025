@@ -1,0 +1,124 @@
+---
+title: "Aula 1 - Introdução à ciência de dados"
+author: "Thiago S. F .Silva"
+format: revealjs
+---
+
+## Apresentações
+
+Eu: Thiago Silva
+
+-   Biologia (UFRN, 2002)
+
+-   Sensoriamento Remoto (INPE, 2004)
+
+-   Geografia Física (UVic, 2009)
+
+-   Funcionamento e dinâmica de ecossistemas
+
+-   Efeitos das mudanças globais sobre a biota
+
+-   Interface entre Ecologia, Computação e Geociências
+
+-   "Ecologia Digital"
+
+Vocês?
+
+## O que esse curso é sobre?
+
+-   Análise **preditiva** de dados
+-   Introdução ao aprendizado de máquina (*machine learning*)
+-   Conversa sobre princípios e práticas científicas
+-   Ponto de partida para o seu próprio aprendizado
+
+## O que esse curso não é sobre?
+
+-   Inferência estatística (mas vamos tocar nela várias vezes)
+-   "IA"
+
+# *Machine Learning?*
+
+##  {#slide3-id data-menu-title="Machine Learning?"}
+
+![Fonte: Xiaochen, Zhou, et al. "DeepDiveAI: Identifying AI Related Documents in Large Scale Literature Data." arXiv preprint arXiv:2408.12871 (2024).](..\figs\ml_wordcloud.jpg)
+
+## Terminologia
+
+![](..\figs\ml_venn.png)
+
+## Estatística?
+
+Matemática vs. Estatística?
+
+O que é Estatística?
+
+Por que usamos Estatística?
+
+## Estatística
+
+- Exploração
+
+- Confirmação
+
+- Predição
+
+## Estatística
+
+- Exploração: sem expectativas prévias, perguntas abertas.
+
+- Confirmação: hipóteses pré-estabelecidas
+
+- Predição: foco em gerar novos dados
+
+## Exemplo:
+
+**Exp:** Quão intenso é o efeito da redução de disponibilidade hídrica sobre o crescimento da espécie de planta *Plantus plantus*?
+
+**Conf:** A redução em 50% na disponibibilidade hídrica esperada para a década de 2100 resultará em redução de pelo menos 30% no crescimento de *Plantus plantus*.
+
+**Pred:** Qual o crescimento esperado para *Plantus plantus* em 2100 sob os cenários A, B e C de mudanças climáticas?
+
+## Machine Learning
+
+- Utiliza análise exploratória para entendimento dos *dados*
+
+- Não se preocupa com confimação
+
+- Especializado em gerar as melhores *predições* possíveis. 
+
+## Machine learning é estatística?
+
+![](..\figs\stats_ML_AI.png)
+
+## Um modelo de regressão
+
+```{r goodbadmodel, echo=FALSE}
+set.seed(45)
+n <- 1000
+x <- runif(n,0,100)
+res <- rnorm(n,0,100)
+y <- 0.5 + 0.4 * x + res
+
+df <- data.frame(x=x,y=y)
+
+m <- lm(y ~ x, data = df)
+
+summary(m)
+```
+## 
+
+```{r plot goodbadmodel, echo=FALSE}
+library(ggplot2)
+mny <- mean(df$y)
+ggplot(df,aes(x,y)) + geom_point() +
+    geom_smooth(method='lm') + geom_hline(aes(yintercept = mny ), linetype=2, col='red')
+```
+## 
+
+```{r obsvspred, echo=FALSE}
+df$pred <- predict(m)
+ggplot(df,aes(y,pred)) + geom_point() +
+    geom_smooth(method='lm',se=FALSE) +
+    xlab('Observed') + ylab('Predicted')
+```
+
