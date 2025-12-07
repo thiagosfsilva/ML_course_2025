@@ -1,18 +1,22 @@
 ---
-title: "Aula 1 - Introdução à ciência de dados"
+title: "Aula 1 - Introdução "
 author: "Thiago S. F .Silva"
 format: revealjs
 ---
 
-## Apresentações
+## Apresentações {.smaller}
 
-Eu: Thiago Silva
+**Eu: Thiago Silva**
 
--   Biologia (UFRN, 2002)
+*Formação:*
+
+- Biologia (UFRN, 2002)
 
 -   Sensoriamento Remoto (INPE, 2004)
 
 -   Geografia Física (UVic, 2009)
+
+*Interesses:*
 
 -   Funcionamento e dinâmica de ecossistemas
 
@@ -22,7 +26,7 @@ Eu: Thiago Silva
 
 -   "Ecologia Digital"
 
-Vocês?
+**Vocês?**
 
 ## O que esse curso é sobre?
 
@@ -34,11 +38,19 @@ Vocês?
 ## O que esse curso não é sobre?
 
 -   Inferência estatística (mas vamos tocar nela várias vezes)
--   "IA"
+-   "IA" - mas vamos contextualizar.
 
-# *Machine Learning?*
 
-##  {#slide3-id data-menu-title="Machine Learning?"}
+## Ciência de dados / data science ? {.smaller}
+
+Wikipedia: 
+
+A *ciência de dados* é um campo **interdisciplinar** que utiliza *estatística*, *computação*, *método científico*, *visualização científica*, *algoritmos* e *sistemas* para **extrair ou extrapolar conhecimento** a partir de **dados** potencialmente *ruidosos*, *estruturados* ou *não-estruturados*.[2]
+
+A ciência de dados também integra **conhecimento especializado** do domínio de aplicação (ex. ciências naturais, ciências sociais, medicina).
+
+
+## Machine Learning?
 
 ![Fonte: Xiaochen, Zhou, et al. "DeepDiveAI: Identifying AI Related Documents in Large Scale Literature Data." arXiv preprint arXiv:2408.12871 (2024).](..\figs\ml_wordcloud.jpg)
 
@@ -46,13 +58,14 @@ Vocês?
 
 ![](..\figs\ml_venn.png)
 
+
 ## Estatística?
 
 Matemática vs. Estatística?
 
-O que é Estatística?
+- O que é Estatística?
 
-Por que usamos Estatística?
+- Por que usamos Estatística?
 
 ## Estatística
 
@@ -70,30 +83,31 @@ Por que usamos Estatística?
 
 - Predição: foco em gerar novos dados
 
-## Exemplo:
+## Exemplo: {.smaller}
 
-**Exp:** Quão intenso é o efeito da redução de disponibilidade hídrica sobre o crescimento da espécie de planta *Plantus plantus*?
+**Explorsação:** Quão intenso é o efeito da redução de disponibilidade hídrica sobre o crescimento da espécie de planta *Plantus plantus*?
 
-**Conf:** A redução em 50% na disponibibilidade hídrica esperada para a década de 2100 resultará em redução de pelo menos 30% no crescimento de *Plantus plantus*.
+**Confirmação:** A redução em 50% na disponibibilidade hídrica esperada para a década de 2100 resultará em redução de pelo menos 30% no crescimento de *Plantus plantus*.
 
-**Pred:** Qual o crescimento esperado para *Plantus plantus* em 2100 sob os cenários A, B e C de mudanças climáticas?
+**Predição:** Qual o crescimento esperado para *Plantus plantus* em 2100 sob os cenários A, B e C de mudanças climáticas?
 
 ## Machine Learning
 
-- Utiliza análise exploratória para entendimento dos *dados*
+- Utiliza **análise exploratória** para entendimento dos *dados*
 
-- Não se preocupa com confimação
+- Não se preocupa com **confimação**.
 
-- Especializado em gerar as melhores *predições* possíveis. 
+- Especializado em gerar as melhores **predições** possíveis. 
 
 ## Machine learning é estatística?
 
 ![](..\figs\stats_ML_AI.png)
 
-## Um modelo de regressão
+## Prova oral de estatística
 
 ```{r goodbadmodel, echo=FALSE}
 set.seed(45)
+library(broom)
 n <- 1000
 x <- runif(n,0,100)
 res <- rnorm(n,0,100)
@@ -103,9 +117,10 @@ df <- data.frame(x=x,y=y)
 
 m <- lm(y ~ x, data = df)
 
+print('Um resultado de regressão linear simples:')
 summary(m)
 ```
-## 
+## Gráfico do Modelo
 
 ```{r plot goodbadmodel, echo=FALSE}
 library(ggplot2)
@@ -113,7 +128,7 @@ mny <- mean(df$y)
 ggplot(df,aes(x,y)) + geom_point() +
     geom_smooth(method='lm') + geom_hline(aes(yintercept = mny ), linetype=2, col='red')
 ```
-## 
+## Observado vs Predito
 
 ```{r obsvspred, echo=FALSE}
 df$pred <- predict(m)
@@ -122,3 +137,103 @@ ggplot(df,aes(y,pred)) + geom_point() +
     xlab('Observed') + ylab('Predicted')
 ```
 
+## Bom modelo ou mau modelo?
+
+::: {.incremental}
+
+- Excelente do ponto de vista *confimatório*.
+
+- Péssimo do ponto de vusta *preditivo*.
+
+:::
+
+## Erro, erro, erro
+
+Quando estamos preocupados com predição, só o que importa é o **erro**. 
+
+Como medir erro?
+
+## Validação e teste
+
+Workflow de uma análise estatística 'tradicional':
+
+::: {.incremental}
+
+1. Preparação dos dados
+2. Análise descritiva
+3. Visualização de dados
+4. Ajuste do modelo (teste estatístico)
+5. Interpretação dos resultados
+
+:::
+
+## Validação e teste
+
+Workflow de uma análise preditiva:
+
+::: {.incremental}
+
+1. Preparação dos dados
+2. Análise descritiva
+3. Visualização de dados
+4. Ajuste do modelo 
+5. **Otimização e validação do modelo**
+6. **Teste do modelo**
+
+:::
+
+## Detalhes técnicos
+
+Por que o curso é baseado em *R*? 
+
+- Porque todo profissional nas ciências naturais precisa saber o mínimo de programação.
+- Fácil de instalar e usar.
+- Criado especificamente para análise de dados.
+- 'Padrão' nas ciências naturais.
+
+## Detalhes técnicos
+
+Mas e o tal do *Python*?
+
+- Realmente é a principal linguagem para data science
+- Mais complicada pra instalar e começar a usar
+- Menos popular no mundo acadêmico
+- É uma linguagem criada para uso geral, e por isso muito 'maior' do que o R.
+    - No. Pacotes no CRAN: 23035
+    - No. Pacotes no PyPI: 709358 
+    
+## Entrando no "Tidyverso"
+
+**Tidyverse:** um conjunto de pacotes do R que 'redefiniu' a linguagem e a maneira de trabalhar, com ênfase em ciência de dados. 
+
+[https://tidyverse.org/](https://tidyverse.org/)
+
+## Tidyverse
+
+O conceito central do tidyverse é o operador '*pipe*' (cano), que conecta operações sequenciais:
+
+`%>%`   ou    `|>` a partir do R 4.0
+
+## Sem pipe
+
+```{r, echo=TRUE}
+summary(iris)
+
+sel <- iris[iris$Sepal.Length > 6,]
+sel <-  sel[,"Petal.Width"]
+res <- mean(sel)
+res
+
+# Ou tudo em uma linha
+res <- mean(iris[iris$Sepal.Length > 6, "Petal.Width"])
+res
+```
+## Com pipe
+
+```{r, echo=TRUE}
+library(tidyverse)
+res <- iris %>% 
+  filter(Sepal.Length > 6) %>% 
+  summarise(mean_pw = mean(Petal.Width))
+res
+```

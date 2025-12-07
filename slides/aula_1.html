@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Thiago S. F .Silva">
-  <title>Aula 1 - Introdução à ciência de dados</title>
+  <title>Aula 1 - Introdução</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="aula_1_files/libs/revealjs/dist/theme/quarto.css">
   <link href="aula_1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -326,7 +391,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Aula 1 - Introdução à ciência de dados</h1>
+  <h1 class="title">Aula 1 - Introdução</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -337,19 +402,23 @@ Thiago S. F .Silva
 </div>
 
 </section>
-<section id="apresentações" class="slide level2">
+<section id="apresentações" class="slide level2 smaller">
 <h2>Apresentações</h2>
-<p>Eu: Thiago Silva</p>
+<p><strong>Eu: Thiago Silva</strong></p>
+<p><em>Formação:</em></p>
 <ul>
 <li><p>Biologia (UFRN, 2002)</p></li>
 <li><p>Sensoriamento Remoto (INPE, 2004)</p></li>
 <li><p>Geografia Física (UVic, 2009)</p></li>
+</ul>
+<p><em>Interesses:</em></p>
+<ul>
 <li><p>Funcionamento e dinâmica de ecossistemas</p></li>
 <li><p>Efeitos das mudanças globais sobre a biota</p></li>
 <li><p>Interface entre Ecologia, Computação e Geociências</p></li>
 <li><p>“Ecologia Digital”</p></li>
 </ul>
-<p>Vocês?</p>
+<p><strong>Vocês?</strong></p>
 </section>
 <section id="o-que-esse-curso-é-sobre" class="slide level2">
 <h2>O que esse curso é sobre?</h2>
@@ -364,16 +433,17 @@ Thiago S. F .Silva
 <h2>O que esse curso não é sobre?</h2>
 <ul>
 <li>Inferência estatística (mas vamos tocar nela várias vezes)</li>
-<li>“IA”</li>
+<li>“IA” - mas vamos contextualizar.</li>
 </ul>
 </section>
-<section>
-<section id="machine-learning" class="title-slide slide level1 center">
-<h1><em>Machine Learning?</em></h1>
-
+<section id="ciência-de-dados-data-science" class="slide level2 smaller">
+<h2>Ciência de dados / data science ?</h2>
+<p>Wikipedia:</p>
+<p>A <em>ciência de dados</em> é um campo <strong>interdisciplinar</strong> que utiliza <em>estatística</em>, <em>computação</em>, <em>método científico</em>, <em>visualização científica</em>, <em>algoritmos</em> e <em>sistemas</em> para <strong>extrair ou extrapolar conhecimento</strong> a partir de <strong>dados</strong> potencialmente <em>ruidosos</em>, <em>estruturados</em> ou <em>não-estruturados</em>.[2]</p>
+<p>A ciência de dados também integra <strong>conhecimento especializado</strong> do domínio de aplicação (ex. ciências naturais, ciências sociais, medicina).</p>
 </section>
-<section id="slide3-id" class="slide level2" data-menu-title="Machine Learning?">
-<h2></h2>
+<section id="machine-learning" class="slide level2">
+<h2>Machine Learning?</h2>
 
 <img data-src="..\figs\ml_wordcloud.jpg" class="r-stretch quarto-figure-center"><p class="caption">Fonte: Xiaochen, Zhou, et al.&nbsp;“DeepDiveAI: Identifying AI Related Documents in Large Scale Literature Data.” arXiv preprint arXiv:2408.12871 (2024).</p></section>
 <section id="terminologia" class="slide level2">
@@ -383,8 +453,10 @@ Thiago S. F .Silva
 <section id="estatística" class="slide level2">
 <h2>Estatística?</h2>
 <p>Matemática vs.&nbsp;Estatística?</p>
-<p>O que é Estatística?</p>
-<p>Por que usamos Estatística?</p>
+<ul>
+<li><p>O que é Estatística?</p></li>
+<li><p>Por que usamos Estatística?</p></li>
+</ul>
 </section>
 <section id="estatística-1" class="slide level2">
 <h2>Estatística</h2>
@@ -402,27 +474,30 @@ Thiago S. F .Silva
 <li><p>Predição: foco em gerar novos dados</p></li>
 </ul>
 </section>
-<section id="exemplo" class="slide level2">
+<section id="exemplo" class="slide level2 smaller">
 <h2>Exemplo:</h2>
-<p><strong>Exp:</strong> Quão intenso é o efeito da redução de disponibilidade hídrica sobre o crescimento da espécie de planta <em>Plantus plantus</em>?</p>
-<p><strong>Conf:</strong> A redução em 50% na disponibibilidade hídrica esperada para a década de 2100 resultará em redução de pelo menos 30% no crescimento de <em>Plantus plantus</em>.</p>
-<p><strong>Pred:</strong> Qual o crescimento esperado para <em>Plantus plantus</em> em 2100 sob os cenários A, B e C de mudanças climáticas?</p>
+<p><strong>Explorsação:</strong> Quão intenso é o efeito da redução de disponibilidade hídrica sobre o crescimento da espécie de planta <em>Plantus plantus</em>?</p>
+<p><strong>Confirmação:</strong> A redução em 50% na disponibibilidade hídrica esperada para a década de 2100 resultará em redução de pelo menos 30% no crescimento de <em>Plantus plantus</em>.</p>
+<p><strong>Predição:</strong> Qual o crescimento esperado para <em>Plantus plantus</em> em 2100 sob os cenários A, B e C de mudanças climáticas?</p>
 </section>
 <section id="machine-learning-1" class="slide level2">
 <h2>Machine Learning</h2>
 <ul>
-<li><p>Utiliza análise exploratória para entendimento dos <em>dados</em></p></li>
-<li><p>Não se preocupa com confimação</p></li>
-<li><p>Especializado em gerar as melhores <em>predições</em> possíveis.</p></li>
+<li><p>Utiliza <strong>análise exploratória</strong> para entendimento dos <em>dados</em></p></li>
+<li><p>Não se preocupa com <strong>confimação</strong>.</p></li>
+<li><p>Especializado em gerar as melhores <strong>predições</strong> possíveis.</p></li>
 </ul>
 </section>
 <section id="machine-learning-é-estatística" class="slide level2">
 <h2>Machine learning é estatística?</h2>
 
 <img data-src="..\figs\stats_ML_AI.png" class="r-stretch"></section>
-<section id="um-modelo-de-regressão" class="slide level2">
-<h2>Um modelo de regressão</h2>
+<section id="prova-oral-de-estatística" class="slide level2">
+<h2>Prova oral de estatística</h2>
 <div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Um resultado de regressão linear simples:"</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -445,19 +520,143 @@ F-statistic: 9.434 on 1 and 998 DF,  p-value: 0.002188</code></pre>
 </div>
 </div>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
+<section id="gráfico-do-modelo" class="slide level2">
+<h2>Gráfico do Modelo</h2>
 
 <img data-src="aula_1_files/figure-revealjs/plot%20goodbadmodel-1.png" width="960" class="r-stretch"></section>
-<section id="section-1" class="slide level2">
-<h2></h2>
+<section id="observado-vs-predito" class="slide level2">
+<h2>Observado vs Predito</h2>
 
-<img data-src="aula_1_files/figure-revealjs/obsvspred-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
+<img data-src="aula_1_files/figure-revealjs/obsvspred-1.png" width="960" class="r-stretch"></section>
+<section id="bom-modelo-ou-mau-modelo" class="slide level2">
+<h2>Bom modelo ou mau modelo?</h2>
+<div>
+<ul>
+<li class="fragment"><p>Excelente do ponto de vista <em>confimatório</em>.</p></li>
+<li class="fragment"><p>Péssimo do ponto de vusta <em>preditivo</em>.</p></li>
+</ul>
+</div>
+</section>
+<section id="erro-erro-erro" class="slide level2">
+<h2>Erro, erro, erro</h2>
+<p>Quando estamos preocupados com predição, só o que importa é o <strong>erro</strong>.</p>
+<p>Como medir erro?</p>
+</section>
+<section id="validação-e-teste" class="slide level2">
+<h2>Validação e teste</h2>
+<p>Workflow de uma análise estatística ‘tradicional’:</p>
+<div>
+<ol type="1">
+<li class="fragment">Preparação dos dados</li>
+<li class="fragment">Análise descritiva</li>
+<li class="fragment">Visualização de dados</li>
+<li class="fragment">Ajuste do modelo (teste estatístico)</li>
+<li class="fragment">Interpretação dos resultados</li>
+</ol>
+</div>
+</section>
+<section id="validação-e-teste-1" class="slide level2">
+<h2>Validação e teste</h2>
+<p>Workflow de uma análise preditiva:</p>
+<div>
+<ol type="1">
+<li class="fragment">Preparação dos dados</li>
+<li class="fragment">Análise descritiva</li>
+<li class="fragment">Visualização de dados</li>
+<li class="fragment">Ajuste do modelo</li>
+<li class="fragment"><strong>Otimização e validação do modelo</strong></li>
+<li class="fragment"><strong>Teste do modelo</strong></li>
+</ol>
+</div>
+</section>
+<section id="detalhes-técnicos" class="slide level2">
+<h2>Detalhes técnicos</h2>
+<p>Por que o curso é baseado em <em>R</em>?</p>
+<ul>
+<li>Porque todo profissional nas ciências naturais precisa saber o mínimo de programação.</li>
+<li>Fácil de instalar e usar.</li>
+<li>Criado especificamente para análise de dados.</li>
+<li>‘Padrão’ nas ciências naturais.</li>
+</ul>
+</section>
+<section id="detalhes-técnicos-1" class="slide level2">
+<h2>Detalhes técnicos</h2>
+<p>Mas e o tal do <em>Python</em>?</p>
+<ul>
+<li>Realmente é a principal linguagem para data science</li>
+<li>Mais complicada pra instalar e começar a usar</li>
+<li>Menos popular no mundo acadêmico</li>
+<li>É uma linguagem criada para uso geral, e por isso muito ‘maior’ do que o R.
+<ul>
+<li>No.&nbsp;Pacotes no CRAN: 23035</li>
+<li>No.&nbsp;Pacotes no PyPI: 709358</li>
+</ul></li>
+</ul>
+</section>
+<section id="entrando-no-tidyverso" class="slide level2">
+<h2>Entrando no “Tidyverso”</h2>
+<p><strong>Tidyverse:</strong> um conjunto de pacotes do R que ‘redefiniu’ a linguagem e a maneira de trabalhar, com ênfase em ciência de dados.</p>
+<p><a href="https://tidyverse.org/">https://tidyverse.org/</a></p>
+</section>
+<section id="tidyverse" class="slide level2">
+<h2>Tidyverse</h2>
+<p>O conceito central do tidyverse é o operador ‘<em>pipe</em>’ (cano), que conecta operações sequenciais:</p>
+<p><code>%&gt;%</code> ou <code>|&gt;</code> a partir do R 4.0</p>
+</section>
+<section id="sem-pipe" class="slide level2">
+<h2>Sem pipe</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">summary</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+       Species  
+ setosa    :50  
+ versicolor:50  
+ virginica :50  
+                
+                
+                </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>sel <span class="ot">&lt;-</span> iris[iris<span class="sc">$</span>Sepal.Length <span class="sc">&gt;</span> <span class="dv">6</span>,]</span>
+<span id="cb5-2"><a href=""></a>sel <span class="ot">&lt;-</span>  sel[,<span class="st">"Petal.Width"</span>]</span>
+<span id="cb5-3"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">mean</span>(sel)</span>
+<span id="cb5-4"><a href=""></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.847541</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># Ou tudo em uma linha</span></span>
+<span id="cb7-2"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris[iris<span class="sc">$</span>Sepal.Length <span class="sc">&gt;</span> <span class="dv">6</span>, <span class="st">"Petal.Width"</span>])</span>
+<span id="cb7-3"><a href=""></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.847541</code></pre>
+</div>
+</div>
+</section>
+<section id="com-pipe" class="slide level2">
+<h2>Com pipe</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a href=""></a>res <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href=""></a>  <span class="fu">filter</span>(Sepal.Length <span class="sc">&gt;</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">mean_pw =</span> <span class="fu">mean</span>(Petal.Width))</span>
+<span id="cb9-5"><a href=""></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   mean_pw
+1 1.847541</code></pre>
+</div>
+</div>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
