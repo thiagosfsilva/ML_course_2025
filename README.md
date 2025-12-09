@@ -8,4 +8,10 @@ Material do Curso:
 [Programa](handouts/informacoes_pre_curso.pdf)
 
 [Aula 1](slides/aula_1.pdf)
+    
+    - [Planilha Excel Horrorosa](data/planilha_do_capeta.xlsx)
+    - [Plot Florestal (xlsx)](data/plot_florestal.xlsx)
+    - [Turbidez (csv)](data/turbidez.csv)
+
+
 

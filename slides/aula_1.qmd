@@ -144,7 +144,7 @@ Matemática vs. Estatística?
 
 \footnotesize
 
-```{r goodbadmodel, echo=FALSE}
+```{r goodorbadmodel, echo=FALSE}
 set.seed(45)
 library(broom)
 n <- 1000
@@ -160,7 +160,7 @@ summary(m)
 ```
 ## Gráfico do Modelo
 
-```{r plot goodbadmodel, echo=FALSE}
+```{r plot goodorbadmodelfig, echo=FALSE}
 library(ggplot2)
 mny <- mean(df$y)
 ggplot(df,aes(x,y)) + geom_point() +
@@ -168,7 +168,7 @@ ggplot(df,aes(x,y)) + geom_point() +
 ```
 ## Observado vs Predito
 
-```{r obsvspred, echo=FALSE}
+```{r goodorbadmodelobsvspred, echo=FALSE}
 df$pred <- predict(m)
 ggplot(df,aes(y,pred)) + geom_point() +
     geom_smooth(method='lm',se=FALSE) +
@@ -193,7 +193,7 @@ Quando estamos preocupados com predição, o que realmente importa é minimizar 
 
 O modelo abaixo tem bem pouco erro - estamos satisfeitos?
 
-```{r, echo=FALSE}
+```{r, lowerrorreg, echo=FALSE}
 library(dplyr)
 set.seed(46)
 df <- data.frame(x = runif(20,0,5)) %>% 
@@ -269,14 +269,14 @@ O conceito central do tidyverse é o operador '*pipe*' (cano), que conecta opera
 
 \footnotesize
 
-```{r, echo=TRUE}
+```{r, irissumm, echo=TRUE}
 summary(iris)
 ```
 
 
 ## Sem pipe
 
-```{r, echo=TRUE}
+```{r, irisnopipe, echo=TRUE}
 sel <- iris[iris$Sepal.Length > 6,]
 sel <-  sel[,"Petal.Width"]
 res <- mean(sel)
@@ -285,7 +285,7 @@ res
 
 ## Sem pipe
 
-```{r, echo=TRUE}
+```{r, irisnopipe2, echo=TRUE}
 # Ou tudo em uma linha
 res <- mean(iris[iris$Sepal.Length > 6, "Petal.Width"])
 res
@@ -293,7 +293,7 @@ res
 
 ## Com pipe
 
-```{r, echo=TRUE}
+```{r, iriswithpipe, echo=TRUE}
 library(tidyverse)
 res <- iris %>% 
   filter(Sepal.Length > 6) %>% 

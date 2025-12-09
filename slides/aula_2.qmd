@@ -1,12 +1,17 @@
 ---
 title: "Aula 2 - Gerenciamento de Dados"
-author: "Thiago S. F. Silva"
+subtitle: "Introdução ao aprendizado de máquina - UEMA 2025"
+author: "Thiago S. F .Silva"
+date: 2025-12-10
 format: 
     beamer:
         theme: metropolis
+        linkcolor: blue
+        classoption: '`xcolor={dvipsnames}`{=latex}'
+        
 ---
 
-# Dado vs informação?
+# Aquecimento: dado vs informação?
 
 ## Gerenciamento de dados
 
@@ -20,11 +25,10 @@ format:
 
 Quem é o seu principal colaborador?
 
-::: {.incremental}
+ . . . 
 
 - Você mesmo daqui a 3 meses.
 
-:::
 
 ## Dados estruturados vs. não-estruturados
 
@@ -49,9 +53,7 @@ Quem é o seu principal colaborador?
 
 - Planilhas de campo
 
-## Boas práticas {.smaller}
-
-::: {.incremental}
+## Boas práticas
 
 1. Faça um **estudo piloto**
 
@@ -60,28 +62,38 @@ Quem é o seu principal colaborador?
 3. Anote observações sobre **tudo** o que desviar do protocolo. Não, você não vai lembrar depois.
 
 4. **Backup, backup, backup**:
-    
-    - Dados analógicos: 
-    
-        - Ao final de cada dia/sessão, **fotografe** seu caderno / planilha de campo.
-    
-        - Se houver acesso à internet, já sincronize com a nuvem.
-        
-    - Dados digitais:
-    
-        - Baixe com a maior frequencia possível.
-        
-        - Mantenha pelo menos duas cópias, em dois dispositivos diferentes. 
-        
-        - Se houver acesso à internet, já sincronize com a nuvem. 
 
-:::
+. . .
+    
+- Dados analógicos: 
+    
+    - Ao final de cada dia/sessão, **fotografe** seu caderno / planilha de campo.
+    
+    - Se houver acesso à internet, já sincronize com a nuvem.
+        
+## Boas práticas 
 
-## Boas práticas {.smaller}
+1. Faça um **estudo piloto**
+
+2. Prepare suas planilhas / caderno **antes** de começar.
+
+3. Anote observações sobre **tudo** o que desviar do protocolo. Não, você não vai lembrar depois.
+
+4. **Backup, backup, backup**:        
+   
+- Dados digitais:
+    
+    - Baixe com a maior frequencia possível.
+        
+    - Mantenha pelo menos duas cópias, em dois dispositivos diferentes. 
+        
+    - Se houver acesso à internet, já sincronize com a nuvem. 
+
+## Boas práticas
 
 5. Tente digitar os dados o mais rápido possível - enquanto os detalhes do trabalho ainda estão frescos na sua cabeça.
 
-6. Caderno /planilha vs. entrar dados direto no PC/tablet/telefone?
+Usar vaderno/planilha vs. entrar dados direto no PC/tablet/telefone?
 
 ## Digitando dados
 
@@ -149,13 +161,13 @@ meu_projeto
 
 ## Estilos de nomenclatura de pastas/arquivos/variáveis
 
-**Snake case:** meu_lindo_arquivo.txt
+**Snake case:** `meu_lindo_arquivo.txt`
 
-**Kebab case:** meu-lindo-arquivo.txt
+**Kebab case:** `meu-lindo-arquivo.txt`
 
-**Camel case:** meuLindoArquivo.txt
+**Camel case:** `meuLindoArquivo.txt`
 
-**Pascal case:** MeuLindoArquivo.txt
+**Pascal case:** `MeuLindoArquivo.txt`
 
 Escolha sua favorita - mas seja **consistente**!
 
@@ -164,26 +176,31 @@ Escolha sua favorita - mas seja **consistente**!
 
 ## *Tidy* data
 
+Boa parte do trabalho de análise de dados consiste na organização / limpeza de dados.
+
+**Tidy Data:**
+[https://www.jstatsoft.org/article/view/v059i10](https://www.jstatsoft.org/article/view/v059i10)
+
 - Cada variável é uma coluna
 
 - Cada observação é uma linha
 
 - Cada tabela é um contexto
 
-[https://www.jstatsoft.org/article/view/v059i10](https://www.jstatsoft.org/article/view/v059i10)
 
 ## Armazenando Dados
 
+::: {.incremental}
+
 Qual o melhor formato para armazenamento de dados estruturados?
 
-::: {.incremental}
 - Excel: xls, xlsx
 
 - CSV (Comma Separated Values)
 
-- Parquet
+- [Parquet](https://parquet.apache.org/)
 
-- Estratégia Mista
+- Estratégia Mista: um formato para uso e outro para armazenamento
 
 :::
 
@@ -209,13 +226,127 @@ Passo 1: preparando o arquivo `plot_florestal.xslx`
 
 ## Excel
 
-Pacote: `readxl` (parte do `tidyverse`)
+Pacote: `readxl()` (parte do `tidyverse`)
 
-```{R, echo = TRUE}
+Funções: `read_xls()` e `read_xlsx()`
+
+Help: [https://readxl.tidyverse.org/reference/read_excel.html](https://readxl.tidyverse.org/reference/read_excel.html)
+
+## Código
+
+```{r, florestplotnoeval, echo=TRUE, eval=FALSE}
 library(readxl)
-
-dados <- 0
-
-
+plot_florestal <- read_xlsx('../data/plot_florestal.xlsx')
+head(plot_florestal)
+str(plot_florestal)
+glimpse(plot_florestal)
 ```
 
+## Resultado {visibility="hidden"}
+\footnotesize
+
+```{r, florestplotres}
+library(readxl)
+library(dplyr)
+plot_florestal <- read_xlsx('../data/plot_florestal.xlsx')
+head(plot_florestal)
+glimpse(plot_florestal)
+```
+
+# Desafio: como ler a seguda planilha do arquivo excel?
+
+## Texto Simples (CSV, TSV, etc)
+
+R básico: `read.csv()`, `read.csv2()`,`read.delim()`,`read.table()`
+
+Tidyverse (pacote `readr`): `read_csv()`, `read_csv2()`, `read_tsv()`, `read_delim()`
+
+## Código
+
+```{r, readcsvnoeval, echo=TRUE, eval=FALSE}
+library(readr)
+turb_dados <- read_csv('../data/turbidez.csv')
+head(turb_dados)
+glimpse(turb_dados)
+```
+
+## Resultado {visibility="hidden"}
+
+```{r, readcsveval}
+library(readr)
+turb_dados <- read_csv('../data/turbidez.csv')
+head(turb_dados)
+glimpse(turb_dados)
+```
+
+## Vantages e desvantagens
+
+Excel: 
+- Inclui informação sobre o *data type* de cada coluna
+- Tamanho de arquivo é maior
+- Não é legível sem ter o Excel instalado
+- Quem garante que daqui a 10 anos esse formato ainda vai existir?
+
+Texto:
+- Não inclui informação sobre os *data types*
+- Arquivos menores
+- Qualquer software é capaz de abrir/ler
+
+## Um detalhe sobre texto
+
+Qualquer arquivo digital é armazenado internamente como números (bits).
+
+Como representar texto como números?
+
+. . .
+
+**Encoding:** padrão que define como cada caractere é representado por um número
+
+## ASCII vs UTF-8 vs outros
+
+Os primeiros computadores tinham muito pouca memória/disco.
+
+ASCII: encoding mais básico, só inclui 128 caracteres (7-bit encoding)
+
+##
+
+![](../figs/ascii_table.jpeg){fig-align="center"}
+
+## ASCII vs UTF-8 vs outros
+
+**UTF-8**: usa um método diferente (variable length encoding) e por isso é capaz de armazenar até 1.1 milhão de caracteres.
+    - Multiplas línguas
+    - Símbolos
+    - Emojis
+    - Etc...
+    
+ Existem muitos outros...
+ 
+## ASCII vs UTF-8 vs outros
+ 
+ Se você tenta ler um arquivo criado com um certo encoding, especificado um encoding diferente, o resultado pode ser estranho:
+ 
+```{r writeutf8, echo=TRUE}
+# Gravando um arquivo em UTF-8 
+con <- file("exemplo_utf8.txt", open = "w", encoding = "UTF-8")
+writeLines("Maçã, café, romã, pêra, 😊", con)
+close(con)
+```
+## ASCII vs UTF-8 vs outros
+```{r readutf8, echo=TRUE}
+# Lendo como UTF-8
+con <- file("exemplo_utf8.txt", open = "r", encoding = "UTF-8")
+content <- readLines(con, warn = FALSE)
+close(con)
+content
+```
+## ASCII vs UTF-8 vs outros
+```{r readascii, echo=TRUE}
+# Lendo como ASCII
+con <- file("exemplo_utf8.txt", open = "r", encoding = "ASCII")
+content <- readLines(con, warn = FALSE)
+close(con)
+content
+```
+ 
+ 
