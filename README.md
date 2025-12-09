@@ -9,9 +9,9 @@ Material do Curso:
 
 [Aula 1](slides/aula_1.pdf)
     
-    - [Planilha Excel Horrorosa](data/planilha_do_capeta.xlsx)
-    - [Plot Florestal (xlsx)](data/plot_florestal.xlsx)
-    - [Turbidez (csv)](data/turbidez.csv)
+[Planilha Excel Horrorosa](data/planilha_do_capeta.xlsx)
+[Plot Florestal (xlsx)](data/plot_florestal.xlsx)
+[Turbidez (csv)](data/turbidez.csv)
 
 
 
