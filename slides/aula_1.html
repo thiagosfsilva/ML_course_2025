@@ -469,16 +469,20 @@ Thiago S. F .Silva
 <section id="estatística-2" class="slide level2">
 <h2>Estatística</h2>
 <ul>
-<li><p>Exploração: sem expectativas prévias, perguntas abertas.</p></li>
-<li><p>Confirmação: hipóteses pré-estabelecidas</p></li>
-<li><p>Predição: foco em gerar novos dados</p></li>
+<li><p><strong>Exploração</strong>: sem expectativas prévias, perguntas abertas.</p></li>
+<li><p><strong>Confirmação</strong>: hipóteses pré-estabelecidas</p></li>
+<li><p><strong>Predição</strong>: foco em gerar novos dados</p></li>
 </ul>
 </section>
 <section id="exemplo" class="slide level2 smaller">
 <h2>Exemplo:</h2>
-<p><strong>Explorsação:</strong> Quão intenso é o efeito da redução de disponibilidade hídrica sobre o crescimento da espécie de planta <em>Plantus plantus</em>?</p>
-<p><strong>Confirmação:</strong> A redução em 50% na disponibibilidade hídrica esperada para a década de 2100 resultará em redução de pelo menos 30% no crescimento de <em>Plantus plantus</em>.</p>
-<p><strong>Predição:</strong> Qual o crescimento esperado para <em>Plantus plantus</em> em 2100 sob os cenários A, B e C de mudanças climáticas?</p>
+<div>
+<ul>
+<li class="fragment"><p><strong>Exploração:</strong> Quão intenso é o efeito da redução de disponibilidade hídrica sobre o crescimento da espécie de planta <em>Plantus plantus</em>?</p></li>
+<li class="fragment"><p><strong>Confirmação:</strong> A redução em 50% na disponibibilidade hídrica esperada para a década de 2100 resultará em redução de pelo menos 30% no crescimento de <em>Plantus plantus</em>.</p></li>
+<li class="fragment"><p><strong>Predição:</strong> Qual o crescimento esperado para <em>Plantus plantus</em> em 2100 sob os cenários A, B e C de mudanças climáticas?</p></li>
+</ul>
+</div>
 </section>
 <section id="machine-learning-1" class="slide level2">
 <h2>Machine Learning</h2>
@@ -533,15 +537,19 @@ F-statistic: 9.434 on 1 and 998 DF,  p-value: 0.002188</code></pre>
 <div>
 <ul>
 <li class="fragment"><p>Excelente do ponto de vista <em>confimatório</em>.</p></li>
-<li class="fragment"><p>Péssimo do ponto de vusta <em>preditivo</em>.</p></li>
+<li class="fragment"><p>Péssimo do ponto de vista <em>preditivo</em>.</p></li>
 </ul>
 </div>
 </section>
 <section id="erro-erro-erro" class="slide level2">
 <h2>Erro, erro, erro</h2>
-<p>Quando estamos preocupados com predição, só o que importa é o <strong>erro</strong>.</p>
-<p>Como medir erro?</p>
+<p>Quando estamos preocupados com predição, o que realmente importa é minimizar o <strong>erro</strong>.</p>
 </section>
+<section id="pouco-erro" class="slide level2">
+<h2>Pouco erro</h2>
+<p>O modelo abaixo tem bem pouco erro - estamos satisfeitos?</p>
+
+<img data-src="aula_1_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
 <section id="validação-e-teste" class="slide level2">
 <h2>Validação e teste</h2>
 <p>Workflow de uma análise estatística ‘tradicional’:</p>
@@ -563,6 +571,7 @@ F-statistic: 9.434 on 1 and 998 DF,  p-value: 0.002188</code></pre>
 <li class="fragment">Preparação dos dados</li>
 <li class="fragment">Análise descritiva</li>
 <li class="fragment">Visualização de dados</li>
+<li class="fragment"><strong>Divisão dos dados em <em>treinamento</em> e <em>teste</em> </strong></li>
 <li class="fragment">Ajuste do modelo</li>
 <li class="fragment"><strong>Otimização e validação do modelo</strong></li>
 <li class="fragment"><strong>Teste do modelo</strong></li>
@@ -583,9 +592,9 @@ F-statistic: 9.434 on 1 and 998 DF,  p-value: 0.002188</code></pre>
 <h2>Detalhes técnicos</h2>
 <p>Mas e o tal do <em>Python</em>?</p>
 <ul>
-<li>Realmente é a principal linguagem para data science</li>
-<li>Mais complicada pra instalar e começar a usar</li>
-<li>Menos popular no mundo acadêmico</li>
+<li>Sim, é a principal linguagem para data science.</li>
+<li>Mais complicada pra instalar e começar a usar.</li>
+<li>Menos popular no mundo acadêmico.</li>
 <li>É uma linguagem criada para uso geral, e por isso muito ‘maior’ do que o R.
 <ul>
 <li>No.&nbsp;Pacotes no CRAN: 23035</li>
@@ -603,7 +612,7 @@ F-statistic: 9.434 on 1 and 998 DF,  p-value: 0.002188</code></pre>
 <p>O conceito central do tidyverse é o operador ‘<em>pipe</em>’ (cano), que conecta operações sequenciais:</p>
 <p><code>%&gt;%</code> ou <code>|&gt;</code> a partir do R 4.0</p>
 </section>
-<section id="sem-pipe" class="slide level2">
+<section id="sem-pipe" class="slide level2 smaller">
 <h2>Sem pipe</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">summary</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

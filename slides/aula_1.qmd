@@ -77,19 +77,23 @@ Matemática vs. Estatística?
 
 ## Estatística
 
-- Exploração: sem expectativas prévias, perguntas abertas.
+- **Exploração**: sem expectativas prévias, perguntas abertas.
 
-- Confirmação: hipóteses pré-estabelecidas
+- **Confirmação**: hipóteses pré-estabelecidas
 
-- Predição: foco em gerar novos dados
+- **Predição**: foco em gerar novos dados
 
 ## Exemplo: {.smaller}
 
-**Explorsação:** Quão intenso é o efeito da redução de disponibilidade hídrica sobre o crescimento da espécie de planta *Plantus plantus*?
+::: {.incremental}
 
-**Confirmação:** A redução em 50% na disponibibilidade hídrica esperada para a década de 2100 resultará em redução de pelo menos 30% no crescimento de *Plantus plantus*.
+- **Exploração:** Quão intenso é o efeito da redução de disponibilidade hídrica sobre o crescimento da espécie de planta *Plantus plantus*?
 
-**Predição:** Qual o crescimento esperado para *Plantus plantus* em 2100 sob os cenários A, B e C de mudanças climáticas?
+- **Confirmação:** A redução em 50% na disponibibilidade hídrica esperada para a década de 2100 resultará em redução de pelo menos 30% no crescimento de *Plantus plantus*.
+
+- **Predição:** Qual o crescimento esperado para *Plantus plantus* em 2100 sob os cenários A, B e C de mudanças climáticas?
+
+:::
 
 ## Machine Learning
 
@@ -143,15 +147,27 @@ ggplot(df,aes(y,pred)) + geom_point() +
 
 - Excelente do ponto de vista *confimatório*.
 
-- Péssimo do ponto de vusta *preditivo*.
+- Péssimo do ponto de vista *preditivo*.
 
 :::
 
 ## Erro, erro, erro
 
-Quando estamos preocupados com predição, só o que importa é o **erro**. 
+Quando estamos preocupados com predição, o que realmente importa é minimizar o **erro**. 
 
-Como medir erro?
+## Pouco erro
+
+O modelo abaixo tem bem pouco erro - estamos satisfeitos?
+
+```{r, echo=FALSE}
+library(dplyr)
+set.seed(46)
+df <- data.frame(x = runif(20,0,5)) %>% 
+  mutate(y = 2 + 3 * x + rnorm(20,0,0.1))
+
+ggplot(df,aes(x,y)) + geom_point() + geom_smooth()
+```
+
 
 ## Validação e teste
 
@@ -176,9 +192,10 @@ Workflow de uma análise preditiva:
 1. Preparação dos dados
 2. Análise descritiva
 3. Visualização de dados
-4. Ajuste do modelo 
-5. **Otimização e validação do modelo**
-6. **Teste do modelo**
+4. **Divisão dos dados em *treinamento* e *teste* **
+5. Ajuste do modelo 
+7. **Otimização e validação do modelo** 
+8. **Teste do modelo**
 
 :::
 
@@ -195,9 +212,9 @@ Por que o curso é baseado em *R*?
 
 Mas e o tal do *Python*?
 
-- Realmente é a principal linguagem para data science
-- Mais complicada pra instalar e começar a usar
-- Menos popular no mundo acadêmico
+- Sim, é a principal linguagem para data science.
+- Mais complicada pra instalar e começar a usar.
+- Menos popular no mundo acadêmico.
 - É uma linguagem criada para uso geral, e por isso muito 'maior' do que o R.
     - No. Pacotes no CRAN: 23035
     - No. Pacotes no PyPI: 709358 
@@ -214,7 +231,7 @@ O conceito central do tidyverse é o operador '*pipe*' (cano), que conecta opera
 
 `%>%`   ou    `|>` a partir do R 4.0
 
-## Sem pipe
+## Sem pipe {.smaller}
 
 ```{r, echo=TRUE}
 summary(iris)
