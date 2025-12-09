@@ -101,15 +101,66 @@ Qual software você usa pra digitar seus dados?
 
 # Exemplo 1 - Idenfique e corrija os problemas
 
-
-# Preparando o RSTudio para trabalhar
+# Prática: Configurando o RStudio para trabalhar
 
 ## Projetos no RStudio
 
-Uma parte **essencial** da análise de dados é a estuturação de um *projeto*:
+Uma parte **essencial** da análise de dados é a estruturação de um *projeto*:
 
 - Conjunto de pastas que organiza o trabalho
 
+- Ajuda na auto-documentação do projeto
+
+- Diferentes análises - diferentes projetos
+
+
+## Organização mínima de um projeto:
+
+```
+meu_projeto
+    |_____ src
+    |_____ data
+    |        |_____ raw
+    |        |_____ processed
+    |_____ outputs
+    |_____ docs
+
+```
+
+## Organização mínima de um projeto:
+
+```
+meu_projeto
+    |_____ scripts
+    |_____ dados
+    |        |_____ brutos
+    |        |_____ processados
+    |_____ resultados
+    |_____ notas
+
+```
+
+## Boas práticas de nomenclatura de pastas/arquivos
+
+- sem letras maiúsculas
+- sem acentos
+- sem espaços 
+- usar somente `-` e `_` como caracteres extra
+
+## Estilos de nomenclatura de pastas/arquivos/variáveis
+
+**Snake case:** meu_lindo_arquivo.txt
+
+**Kebab case:** meu-lindo-arquivo.txt
+
+**Camel case:** meuLindoArquivo.txt
+
+**Pascal case:** MeuLindoArquivo.txt
+
+Escolha sua favorita - mas seja **consistente**!
+
+
+# Exemplo: criando um projeto no RStudio
 
 ## *Tidy* data
 
