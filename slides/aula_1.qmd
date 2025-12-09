@@ -1,10 +1,18 @@
 ---
-title: "Aula 1 - Introdução "
+title: "Aula 1 - Introdução"
+subtitle: "Introdução ao aprendizado de máquina - UEMA 2025"
 author: "Thiago S. F .Silva"
-format: revealjs
+date: 2025-12-09
+format: 
+    beamer:
+        theme: metropolis
+        linkcolor: blue
+        classoption: '`xcolor={dvipsnames}`{=latex}' 
 ---
 
-## Apresentações {.smaller}
+## Apresentações 
+
+\small
 
 **Eu: Thiago Silva**
 
@@ -27,6 +35,29 @@ format: revealjs
 -   "Ecologia Digital"
 
 **Vocês?**
+
+## Perfil discente
+
+Nunca ouvi falar / Já ouvi falar / Já usei / Uso sempre
+
+- Programação em R
+- Programação em outras linguagens
+- Estatística descritiva
+- Modelos Lineares (regressão/ANOVA)
+- Sensoriamento Remoto
+- SIG
+- Machine Learning
+
+## Perfil discente
+
+Nunca ouvi falar / Já ouvi falar / Já usei / Uso sempre
+
+- CSV
+- JSON
+- shapefile
+- GeoTiff
+- Git
+- GitHub
 
 ## O que esse curso é sobre?
 
@@ -52,11 +83,13 @@ A ciência de dados também integra **conhecimento especializado** do domínio d
 
 ## Machine Learning?
 
+\tiny
+
 ![Fonte: Xiaochen, Zhou, et al. "DeepDiveAI: Identifying AI Related Documents in Large Scale Literature Data." arXiv preprint arXiv:2408.12871 (2024).](..\figs\ml_wordcloud.jpg)
 
 ## Terminologia
 
-![](..\figs\ml_venn.png)
+![](..\figs\ml_venn.png){fig-align="center"}
 
 
 ## Estatística?
@@ -105,9 +138,11 @@ Matemática vs. Estatística?
 
 ## Machine learning é estatística?
 
-![](..\figs\stats_ML_AI.png)
+![](..\figs\stats_ML_AI.png){fig-align="center"}
 
 ## Prova oral de estatística
+
+\footnotesize
 
 ```{r goodbadmodel, echo=FALSE}
 set.seed(45)
@@ -121,7 +156,6 @@ df <- data.frame(x=x,y=y)
 
 m <- lm(y ~ x, data = df)
 
-print('Um resultado de regressão linear simples:')
 summary(m)
 ```
 ## Gráfico do Modelo
@@ -229,22 +263,34 @@ Mas e o tal do *Python*?
 
 O conceito central do tidyverse é o operador '*pipe*' (cano), que conecta operações sequenciais:
 
-`%>%`   ou    `|>` a partir do R 4.0
+`%>%`   ou    `|>`   a partir do R 4.0
 
-## Sem pipe {.smaller}
+## Um exemplo
+
+\footnotesize
 
 ```{r, echo=TRUE}
 summary(iris)
+```
 
+
+## Sem pipe
+
+```{r, echo=TRUE}
 sel <- iris[iris$Sepal.Length > 6,]
 sel <-  sel[,"Petal.Width"]
 res <- mean(sel)
 res
+```
 
+## Sem pipe
+
+```{r, echo=TRUE}
 # Ou tudo em uma linha
 res <- mean(iris[iris$Sepal.Length > 6, "Petal.Width"])
 res
 ```
+
 ## Com pipe
 
 ```{r, echo=TRUE}
@@ -254,3 +300,13 @@ res <- iris %>%
   summarise(mean_pw = mean(Petal.Width))
 res
 ```
+
+# Perguntas?
+
+## Para amanhã:
+
+**Gerenciamento e visualização de dados**
+
+- Inclui práticas no R
+
+- Se possivel trazer seu computador com R, RStudio e os pacotes básicos já instalados (programa de curso que eu enviei)
