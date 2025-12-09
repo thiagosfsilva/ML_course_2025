@@ -1,0 +1,27 @@
+---
+title: "Ementa"
+format: html
+---
+
+# Curso: Análise preditiva de dados ambientais e geoespacias em R
+Ministrante: Thiago Sanna Freire Silva, University of Stirling, UK
+Carga horária: 60h.
+Pré-requisitos: familiaridade básica com programação em R. Essa familiaridade pode ser obtida completando o seguinte vídeo-curso online gratuito: https://didatica.tech/curso-de-r-online-para-iniciantes/ ou completando os capítulos ‘Pré-Requisitos’e ‘Introdução ao R’ deste livro online gratuito: https://mauriciovancine.github.io/publications/eco-r/.
+Ementa: este curso irá introduzir conceitos de análise preditiva e aprendizagem de máquina (machine learning) aplicados a dados tabulares e dados geoespaciais, no contexto de estudos ecológicos e ambientais. O curso será inteiramente baseado na linguagem de programação R. 
+Programa:
+Dia 1: Introdução à ciência de dados; pré-processamento e gerenciamento de dados tabulares
+Dia 2: Pré-processamento e gerenciamento de dados geoespaciais
+Dia 3: Visualização de dados ambientais e geoespaciais
+Dia 4: Introdução à modelagem: revisitando os modelos de regressão múltipla sob a ótica de predição
+Dia 5: Aprendizado de dados aplicado à modelagem preditiva com dados tabulares
+Dia 6: Aprendizado de dados aplicado à modelagem preditiva com dados geoespaciais (classificação de uso e cobertura da terra)
+Dia 7: Prática guiada em modelagem preditiva de dados
+Dias 8-9: Trabalho supervisionado em projeto independente de modelagem preditiva de dados 
+Dia 10: Apresentação de projetos e discussão, encerramento do curso.
+Referências Bibliográficas:
+Da Silva FR, Gonçalves-Souza T, Paterno GB, Provete DB, Vancine MH (2022). Análises ecológicas no R. Nupeea, Recife, PE, Primeira edição. ISBN 9788579175640. https://canal6.com.br/livreacesso/livro/analises-ecologicas-no-r/
+Wickham H, Çetinkaya-Rundel M, Grolemund G (2023) R for Data Science. O'Reilly Media, Inc. 2nd Edition. ISBN: 9781492097402 https://r4ds.hadley.nz/
+Lovelace R, Nowosad J, Muenchow J (2025). Geocomputation with R. The R Series. CRC Press. ISBN: 1032248882 https://r.geocompx.org/
+Kuhn M, Silge J (2023). Tidy modelling with R: A Framework for Modeling in the Tidyverse. O'Reilly Media, Inc. 1st Edition. ISBN:1492096482. https://www.tmwr.org/
+
+

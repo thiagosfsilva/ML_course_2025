@@ -1,0 +1,170 @@
+---
+title: "Aula 2 - Gerenciamento de Dados"
+author: "Thiago S. F. Silva"
+format: 
+    beamer:
+        theme: metropolis
+---
+
+# Dado vs informação?
+
+## Gerenciamento de dados
+
+- Usabilidade
+
+- Reproducibilidade
+
+- Transparência
+
+- Praticidade
+
+Quem é o seu principal colaborador?
+
+::: {.incremental}
+
+- Você mesmo daqui a 3 meses.
+
+:::
+
+## Dados estruturados vs. não-estruturados
+
+- **Dados Estuturados:** planilhas, bancos de dados - dados organizados de maneira tabular.
+
+- **Dados Não-Estruturados:** fotos, gravações, transcrições de entrevistas, paginas da web, etc. 
+
+## Metadados
+
+**Metadado:** O dado sobre o dado. Informação adicional / documentação explicativa que permite o uso correto e reproduzível dos dados. 
+
+- Especialmente importante para dados não estruturados. 
+
+- Ex: Data, hora, local, coletor, instrumento, condições ambientais, unidades, nomes de variáveis, nomenclatura dos arquivos, organização das pastas. etc.
+
+
+## O gerenciamento de dados começa no campo/laboratório
+
+- Protocolo de amostragem
+
+- Caderno de laboratório
+
+- Planilhas de campo
+
+## Boas práticas {.smaller}
+
+::: {.incremental}
+
+1. Faça um **estudo piloto**
+
+2. Prepare suas planilhas / caderno **antes** de começar.
+
+3. Anote observações sobre **tudo** o que desviar do protocolo. Não, você não vai lembrar depois.
+
+4. **Backup, backup, backup**:
+    
+    - Dados analógicos: 
+    
+        - Ao final de cada dia/sessão, **fotografe** seu caderno / planilha de campo.
+    
+        - Se houver acesso à internet, já sincronize com a nuvem.
+        
+    - Dados digitais:
+    
+        - Baixe com a maior frequencia possível.
+        
+        - Mantenha pelo menos duas cópias, em dois dispositivos diferentes. 
+        
+        - Se houver acesso à internet, já sincronize com a nuvem. 
+
+:::
+
+## Boas práticas {.smaller}
+
+5. Tente digitar os dados o mais rápido possível - enquanto os detalhes do trabalho ainda estão frescos na sua cabeça.
+
+6. Caderno /planilha vs. entrar dados direto no PC/tablet/telefone?
+
+## Digitando dados
+
+Qual software você usa pra digitar seus dados?
+
+::: {.incremental}
+
+- Excel: cuidado com a formatação dos dados (exemplo)
+
+- Datas e horas: [formato ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
+
+- Separadores decimais e de milhar: vírgula ou ponto?
+
+- Indicadores de dado faltante (*missing data*)
+
+:::
+
+# Exemplo 1 - Idenfique e corrija os problemas
+
+
+# Preparando o RSTudio para trabalhar
+
+## Projetos no RStudio
+
+Uma parte **essencial** da análise de dados é a estuturação de um *projeto*:
+
+- Conjunto de pastas que organiza o trabalho
+
+
+## *Tidy* data
+
+- Cada variável é uma coluna
+
+- Cada observação é uma linha
+
+- Cada tabela é um contexto
+
+[https://www.jstatsoft.org/article/view/v059i10](https://www.jstatsoft.org/article/view/v059i10)
+
+## Armazenando Dados
+
+Qual o melhor formato para armazenamento de dados estruturados?
+
+::: {.incremental}
+- Excel: xls, xlsx
+
+- CSV (Comma Separated Values)
+
+- Parquet
+
+- Estratégia Mista
+
+:::
+
+## Armazenando Dados
+
+E dados não-estruturados?
+
+::: {.incremental}
+
+- Priorize formatos abertos
+
+- Use texto simples para os metadados
+
+- Dados de texto não estruturados: JSON
+
+:::
+
+## Lendo dados no R
+
+Exemplo prático: lendo diferentes tipos de arquivos para o R.
+
+Passo 1: preparando o arquivo `plot_florestal.xslx`
+
+## Excel
+
+Pacote: `readxl` (parte do `tidyverse`)
+
+```{R, echo = TRUE}
+library(readxl)
+
+dados <- 0
+
+
+```
+
