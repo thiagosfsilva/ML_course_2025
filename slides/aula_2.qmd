@@ -201,7 +201,9 @@ Como organizar essa tabela de maneira *tidy*?
 
 # Parte III - Gerenciando dados no R
 
-# Prática: Configurando o RStudio para trabalhar
+## Prática
+
+Configurando o RStudio para trabalhar.
 
 ## Projetos no RStudio
 
@@ -257,17 +259,15 @@ meu_projeto
 
 - **Pascal case:** `MeuLindoArquivo.txt`
 
-Pacotes do R às vezes usam o estilo `nome.variavel` para nomes de variáveis. Isso não é aconselhado, pois causa confusão com outras linguagens que usam o `.`. como um operador.
+Pacotes do R às vezes usam o estilo `nome.variavel` para nomes de variáveis. Isso não é aconselhado, pois causa confusão com outras linguagens que usam o `.` como um operador.
 
 Escolha sua favorita - mas seja **consistente**!
 
-## Exemplo: criando um projeto no RStudio
+## Prática: criando um projeto no RStudio
 
-Vamos criar um novo projeto no RStudio para a aula de hoje.
-
-- Criar o projeto
-- Criar a estrutura de pastas
-- Baixar e organizar os arquivos de dados da Aula 1
+- Criando o projeto
+- Criando a estrutura de pastas
+- Baixando e organizando os arquivos de dados da Aula 2
 
 ## Armazenando Dados
 
@@ -341,7 +341,9 @@ head(plot_florestal)
 glimpse(plot_florestal)
 ```
 
-# Desafio: como ler a seguda planilha do arquivo excel?
+## Desafio 
+
+Como importar a *segunda* planilha do arquivo excel?
 
 ## Texto Simples (CSV, TSV, etc)
 
@@ -358,24 +360,17 @@ head(turb_dados)
 glimpse(turb_dados)
 ```
 
-## Resultado {visibility='hidden'}
-
-```{r readcsveval}
-library(readr)
-turb_dados <- read_csv('../data/turbidez.csv')
-head(turb_dados)
-glimpse(turb_dados)
-```
-
 ## Vantages e desvantagens
 
-Excel: 
+**Excel**:
+
 - Inclui informação sobre o *data type* de cada coluna
 - Tamanho de arquivo é maior
 - Não é legível sem ter o Excel instalado
 - Quem garante que daqui a 10 anos esse formato ainda vai existir?
 
-Texto:
+**Texto:**
+
 - Não inclui informação sobre os *data types*
 - Arquivos menores
 - Qualquer software é capaz de abrir/ler
@@ -403,20 +398,23 @@ ASCII: encoding mais básico, só inclui 128 caracteres (7-bit encoding)
 ## ASCII vs UTF-8 vs outros
 
 **UTF-8**: usa um método diferente (variable length encoding) e por isso é capaz de armazenar até 1.1 milhão de caracteres.
+
     - Multiplas línguas
     - Símbolos
     - Emojis
     - Etc...
     
- Existem muitos outros...
+ Existem muitos outros encodings. Mas UTF-8 é amplamente utilizado.
  
-## ASCII vs UTF-8 vs outros
+## Por que eu deveria me importar?
  
- Se você tenta ler um arquivo criado com um certo encoding, especificado um encoding diferente, o resultado pode ser estranho:
+Se você tenta ler um arquivo criado com um certo encoding, mas especificando um encoding diferente, o resultado vai ser estranho:
  
 ```{r writeutf8, echo=TRUE}
 # Gravando um arquivo em UTF-8 
-con <- file('exemplo_utf8.txt', open = 'w', encoding = 'UTF-8')
+con <- file('exemplo_utf8.txt',
+            open = 'w',
+            encoding = 'UTF-8')
 writeLines('Maçã, café, romã, pêra', con)
 close(con)
 ```
@@ -424,7 +422,9 @@ close(con)
 ## ASCII vs UTF-8 vs outros
 ```{r readutf8, echo=TRUE}
 # Lendo como UTF-8
-con <- file('exemplo_utf8.txt', open = 'r', encoding = 'UTF-8')
+con <- file('exemplo_utf8.txt',
+            open = 'r',
+            encoding = 'UTF-8')
 content <- readLines(con, warn = FALSE)
 close(con)
 content
@@ -433,7 +433,9 @@ content
 ## ASCII vs UTF-8 vs outros
 ```{r readascii, echo=TRUE}
 # Lendo como ASCII
-con <- file('exemplo_utf8.txt', open = 'r', encoding = 'ASCII')
+con <- file('exemplo_utf8.txt',
+            open = 'r', 
+            encoding = 'ASCII')
 content <- readLines(con, warn = FALSE)
 close(con)
 content
@@ -441,6 +443,8 @@ content
  
 ## Exemplo de arquivo Parquet
  
+\small
+
 ```{r readparquet, echo=TRUE, eval=FALSE}
 install.packages('arrow')
 library(arrow)
@@ -497,9 +501,9 @@ Os pacotes do `tidyverse` mais importantes para preparo dos dados são:
 
 A principal função utilizada é `pivot_longer`, para desmembrar variáveis.
 
-Tabela formato *largo*(*wide*): geralmente quebram a expectativa de uma variável por coluna
+Tabela formato *largo* (*wide*): geralmente quebram a expectativa de uma variável por coluna
 
-Tabela formato *longo*(*long*): formato esperado com uma variável por coluna.
+Tabela formato *longo* (*long*): formato esperado, com uma variável por coluna.
 
 ## Exemplo - `tidyr`
 
@@ -543,7 +547,7 @@ glimpse(relig_tidy)
 
 ## Exemplo 2 - `tidyr`
 
-Dataset `billboard`: ranking das musicas no topo da lista billboard ao longo das semanas no ano de 2000.
+Dataset `billboard`: ranking das musicas no topo da *billboard* ao longo das semanas no ano de 2000.
 
 ```{r billview, eval=FALSE, echo=TRUE}
 head(billboard)
@@ -585,7 +589,7 @@ Quantas variáveis?
 
 *year*: ano da medição
 
-*new_/*: indica que são novos casos.
+*new_/new*: indica que são novos casos.
 
 *sp/rel/ep*: método de diagnóstico do caso
 
@@ -634,6 +638,8 @@ Exemplos para `mutate()`,`select()`, `filter()`, `arrange()`, `group_by()`,`summ
 
 ## Combinando `stringr`, `dplyr`, `tidyr` e `forcats`
 
+\footnotesize
+
 ```{r tidyrdplyr, eval=FALSE, echo=TRUE}
 who_tidy <- who %>% 
     pivot_longer(cols = starts_with('new'),
@@ -647,15 +653,13 @@ who_tidy <- who %>%
     mutate_if(is.character,as_factor) %>% 
     mutate(diag = fct_recode(
         diag,
-        'sp'='_sp','sn'='_sn','ep'='_ep'
-        )) %>% 
+        'sp'='_sp','sn'='_sn','ep'='_ep')) %>% 
     mutate(age_range = fct_recode(
-        age_range, '0-14'='014' , '15-24'='1524', '25-34' = '2534', '35-44' = '3544' , '45-54' = '4554', '55-64' = '5564', '65+' = '65'
-        )) %>% 
+        age_range, '0-14'='014' , '15-24'='1524',
+        '25-34' = '2534', '35-44' = '3544' ,
+        '45-54' = '4554', '55-64' = '5564', '65+' = '65')) %>% 
     select(-prefix)
     
-    
-
 dim(who_tidy)
 head(who_tidy)
 glimpse(who_tidy)
@@ -668,7 +672,7 @@ levels(who_tidy$age_range)
 
 ## Importante 
 
-**_NUNCA_ substitua os dados originais!**
+**Lembrando: _NUNCA_ substitua os dados originais!**
 
 Os dados 'limpos' devem ser um produto automatizado dos dados originais, salvos em um arquivo diferente
 
