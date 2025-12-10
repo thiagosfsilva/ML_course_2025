@@ -1,17 +1,19 @@
 ---
-title: "Aula 2 - Gerenciamento de Dados"
-subtitle: "Introdução ao aprendizado de máquina - UEMA 2025"
-author: "Thiago S. F .Silva"
+title: 'Aula 2 - Gerenciamento de Dados'
+subtitle: 'Introdução ao aprendizado de máquina - UEMA 2025'
+author: 'Thiago S. F .Silva'
 date: 2025-12-10
 format: 
     beamer:
         theme: metropolis
-        linkcolor: blue
+        urlcolor: blue
         classoption: '`xcolor={dvipsnames}`{=latex}'
         
 ---
 
 # Aquecimento: dado vs informação?
+
+# Parte I: Aspectos Gerais
 
 ## Gerenciamento de dados
 
@@ -44,7 +46,7 @@ Quem é o seu principal colaborador?
 
 - Ex: Data, hora, local, coletor, instrumento, condições ambientais, unidades, nomes de variáveis, nomenclatura dos arquivos, organização das pastas. etc.
 
-Exemplo: exemplo_metadado.txt
+Exemplo: [exemplo_metadado.txt](https://github.com/thiagosfsilva/ML_course_2025/blob/main/data/exemplo_metadado.txt)
 
 Exemplo: [https://zenodo.org/records/13887881](https://zenodo.org/records/13887881)
 
@@ -98,6 +100,9 @@ Exemplo: [https://zenodo.org/records/13887881](https://zenodo.org/records/138878
 
 Caderno/planilha vs. coletar dados direto no PC/tablet/telefone?
 
+
+# Parte II: Aspectos Práticos
+
 ## Digitando dados
 
 Qual software você usa pra digitar seus dados?
@@ -114,9 +119,26 @@ Qual software você usa pra digitar seus dados?
 
 :::
 
-# Exemplo 1 - Preparando uma planilha para receber dados
+## Tipos de dados (*data types*):
 
-# Exemplo 2 - Idenfique e corrija os problemas
+| Tipo de dado | nome R   | nome Excel        |
+|--------------|----------|-------------------|
+| Float        | numeric  | number            |
+| Integer      | integer  | number            |
+| Byte         | numeric  | number            |
+| Boolean      | logical  | -                 |
+| String       | character| text              |
+| Datetime     | POSIx,   | date / date, time |
+
+Demonstração em R?
+
+## Prática 
+
+Preparando uma planilha Excel para receber dados
+
+## Prática
+
+Idenfique e corrija os problemas no arquivo [planilha_do_capeta.xlsx](https://github.com/thiagosfsilva/ML_course_2025/blob/main/data/planilha_do_capeta.xlsx) 
 
 ## *Tidy* data
 
@@ -170,13 +192,14 @@ Como organizar essa tabela de maneira *tidy*?
 | Fazenda C | 2025 | 51        | 3          |
 
 
-## Discussão em pares
+## Encerramento Parte II - Discussão em pares
 
 - Que dados você está coletado / planeja coletar?
 - Como esses dados estão sendo organizados e armazenados?
 - Coomo você acha que pode melhorar essa organização?
 - Se o seu computador desaparecer agora, o que aconteceria com o seu trabalho?
 
+# Parte III - Gerenciando dados no R
 
 # Prática: Configurando o RStudio para trabalhar
 
@@ -226,19 +249,25 @@ meu_projeto
 
 ## Estilos de nomenclatura de pastas/arquivos/variáveis
 
-**Snake case:** `meu_lindo_arquivo.txt`
+- **Snake case:** `meu_lindo_arquivo.txt`
 
-**Kebab case:** `meu-lindo-arquivo.txt`
+- **Kebab case:** `meu-lindo-arquivo.txt`
 
-**Camel case:** `meuLindoArquivo.txt`
+- **Camel case:** `meuLindoArquivo.txt`
 
-**Pascal case:** `MeuLindoArquivo.txt`
+- **Pascal case:** `MeuLindoArquivo.txt`
+
+Pacotes do R às vezes usam o estilo `nome.variavel` para nomes de variáveis. Isso não é aconselhado, pois causa confusão com outras linguagens que usam o `.`. como um operador.
 
 Escolha sua favorita - mas seja **consistente**!
 
-# Exemplo: criando um projeto no RStudio
+## Exemplo: criando um projeto no RStudio
 
+Vamos criar um novo projeto no RStudio para a aula de hoje.
 
+- Criar o projeto
+- Criar a estrutura de pastas
+- Baixar e organizar os arquivos de dados da Aula 1
 
 ## Armazenando Dados
 
@@ -293,7 +322,7 @@ Help: [https://readxl.tidyverse.org/reference/read_excel.html](https://readxl.ti
 
 ## Código
 
-```{r, florestplotnoeval, echo=TRUE, eval=FALSE}
+```{r florestplotnoeval, echo=TRUE, eval=FALSE}
 library(readxl)
 plot_florestal <- read_xlsx('../data/plot_florestal.xlsx')
 head(plot_florestal)
@@ -301,10 +330,10 @@ str(plot_florestal)
 glimpse(plot_florestal)
 ```
 
-## Resultado {visibility="hidden"}
+## Resultado {visibility='hidden'}
 \footnotesize
 
-```{r, florestplotres}
+```{r florestplotres}
 library(readxl)
 library(dplyr)
 plot_florestal <- read_xlsx('../data/plot_florestal.xlsx')
@@ -316,22 +345,22 @@ glimpse(plot_florestal)
 
 ## Texto Simples (CSV, TSV, etc)
 
-R básico: `read.csv()`, `read.csv2()`,`read.delim()`,`read.table()`
+- **R básico:** `read.csv()`, `read.csv2()`,`read.delim()`,`read.table()`
 
-Tidyverse (pacote `readr`): `read_csv()`, `read_csv2()`, `read_tsv()`, `read_delim()`
+- **Tidyverse** (pacote `readr`): `read_csv()`, `read_csv2()`, `read_tsv()`, `read_delim()`
 
 ## Código
 
-```{r, readcsvnoeval, echo=TRUE, eval=FALSE}
+```{r readcsvnoeval, echo=TRUE, eval=FALSE}
 library(readr)
 turb_dados <- read_csv('../data/turbidez.csv')
 head(turb_dados)
 glimpse(turb_dados)
 ```
 
-## Resultado {visibility="hidden"}
+## Resultado {visibility='hidden'}
 
-```{r, readcsveval}
+```{r readcsveval}
 library(readr)
 turb_dados <- read_csv('../data/turbidez.csv')
 head(turb_dados)
@@ -369,7 +398,7 @@ ASCII: encoding mais básico, só inclui 128 caracteres (7-bit encoding)
 
 ##
 
-![](../figs/ascii_table.jpeg){fig-align="center"}
+![](../figs/ascii_table.jpeg){fig-align='center'}
 
 ## ASCII vs UTF-8 vs outros
 
@@ -387,25 +416,268 @@ ASCII: encoding mais básico, só inclui 128 caracteres (7-bit encoding)
  
 ```{r writeutf8, echo=TRUE}
 # Gravando um arquivo em UTF-8 
-con <- file("exemplo_utf8.txt", open = "w", encoding = "UTF-8")
-writeLines("Maçã, café, romã, pêra, 😊", con)
+con <- file('exemplo_utf8.txt', open = 'w', encoding = 'UTF-8')
+writeLines('Maçã, café, romã, pêra', con)
 close(con)
 ```
+
 ## ASCII vs UTF-8 vs outros
 ```{r readutf8, echo=TRUE}
 # Lendo como UTF-8
-con <- file("exemplo_utf8.txt", open = "r", encoding = "UTF-8")
+con <- file('exemplo_utf8.txt', open = 'r', encoding = 'UTF-8')
 content <- readLines(con, warn = FALSE)
 close(con)
 content
 ```
+
 ## ASCII vs UTF-8 vs outros
 ```{r readascii, echo=TRUE}
 # Lendo como ASCII
-con <- file("exemplo_utf8.txt", open = "r", encoding = "ASCII")
+con <- file('exemplo_utf8.txt', open = 'r', encoding = 'ASCII')
 content <- readLines(con, warn = FALSE)
 close(con)
 content
 ```
  
+## Exemplo de arquivo Parquet
  
+```{r readparquet, echo=TRUE, eval=FALSE}
+install.packages('arrow')
+library(arrow)
+
+dados <- read_parquet('../data/flights-1m.parquet')
+head(dados)
+glimpse(dados)
+
+write_csv(dados,'../junk/flights-1m.csv')
+
+saveRDS(dados,'../junk/flights-1m.rds')
+
+# Usando o rad.csv do R base
+testcsv <- read.csv('../junk/flights-1m.csv')
+
+glimpse(testcsv)
+```
+ 
+# Parte III - Organizando dados
+
+## Problemas comuns
+
+- Erros de importação
+- Dados faltantes
+- Erros de digitação
+- Nomes de variável impróprios
+- Tipos de dado incorretos
+- Tabela organizada de maneira 'não-*tidy*'
+
+## Pré-processamento dos dados
+
+O pré-processamento inclui todos os ajustes necessários **antes** de se iniciar a análise.
+
+**Boa Prática:** *Nunca* modifique seu arquivo original.
+
+- Todas as correções devem ser feitas via código
+- Isso torna a análise reproduzível e transparente, e serve como auto-documentação.
+
+## Pré-processamento
+
+Os pacotes do `tidyverse` mais importantes para preparo dos dados são:
+
+ - `tidyr`: [https://tidyr.tidyverse.org/](https://tidyr.tidyverse.org/)
+
+ - `dplyr`: [https://dplyr.tidyverse.org/](https://dplyr.tidyverse.org/)
+
+- `lubridate`:[https://lubridate.tidyverse.org/](https://lubridate.tidyverse.org/)
+
+- `forcats`: [https://forcats.tidyverse.org/](https://forcats.tidyverse.org/)
+
+- `stringr`:[https://stringr.tidyverse.org/](https://stringr.tidyverse.org/)
+
+## Exemplo - `tidyr`
+
+A principal função utilizada é `pivot_longer`, para desmembrar variáveis.
+
+Tabela formato *largo*(*wide*): geralmente quebram a expectativa de uma variável por coluna
+
+Tabela formato *longo*(*long*): formato esperado com uma variável por coluna.
+
+## Exemplo - `tidyr`
+
+Dataset `relig_income`: pesquisa sobre religião e renda.
+
+```{r inspectrelig, echo=TRUE, eval=FALSE}
+library(tidyverse)
+head(relig_income)
+glimpse(relig_income)
+```
+Quais as variáveis desse dataset?
+
+A organização está *tidy*?
+
+## Exemplo 1 - `tidyr`
+
+```{r pivotrelig, eval=FALSE, echo=TRUE}
+library(tidyr)
+relig_tidy <- relig_income %>% 
+    pivot_longer(cols = !religion,
+                 names_to = 'renda',
+                 values_to = 'freq')
+
+head(relig_tidy)
+glimpse(relig_tidy)
+
+```
+
+## Exemplo 1 - `tidyr`
+
+```{r pivotrelig2, eval=FALSE, echo=TRUE}
+relig_tidy <- relig_income %>% 
+    pivot_longer(cols = !religion,
+                 names_to = 'renda',
+                 names_transform = as.factor,
+                 values_to = 'freq')
+
+head(relig_tidy)
+glimpse(relig_tidy)
+```
+
+## Exemplo 2 - `tidyr`
+
+Dataset `billboard`: ranking das musicas no topo da lista billboard ao longo das semanas no ano de 2000.
+
+```{r billview, eval=FALSE, echo=TRUE}
+head(billboard)
+glimpse(billboard)
+```
+
+Quantas variáveis nesse dataset?
+
+## Exemplo 2 - `tidyr`
+
+```{r billtidy, echo=TRUE, eval=FALSE}
+bill_tidy <- billboard %>% 
+    pivot_longer(cols = starts_with('wk'),
+                 names_to = 'week',
+                 values_to = 'rank',
+                 values_drop_na = TRUE)
+
+summary(bill_tidy)    
+head(bill_tidy)
+levels(bill_tidy)
+```
+
+## Exemplo 3 - `tidyr`
+
+Dataset `who`: dados sobre pacientes de tuberculose.
+
+```{r whoinspect, echo=TRUE, eval=FALSE}
+head(who)
+glimpse(who)
+```
+Quantas variáveis?
+
+
+## Exemplo 3 - `tidyr`
+
+*country*: país
+
+*iso2* e *iso3*: siglas padronizadas para cada país   
+
+*year*: ano da medição
+
+*new_/*: indica que são novos casos.
+
+*sp/rel/ep*: método de diagnóstico do caso
+
+*m/f*: gênero do paciente
+
+*014/1524/2535/3544/4554/65*: intervalos de idade
+
+## Exemplo 3 - `tidyr`
+
+```{r tidyrex3, eval=FALSE, echo=TRUE}
+who_tidy <- who %>% 
+    pivot_longer(cols = starts_with('new'),
+                 names_to = 'temp_names',
+                 values_to = 'freq',
+                 values_drop_na = TRUE) 
+
+dim(who_tidy)
+head(who_tidy)
+levels()
+```
+## `dplyr` - o canivete suíço para manipular dados
+
+Principais funções:
+
+- `mutate()`: transformação de variáveis
+- `select()`: seleção de variáveis (colunas)
+- `filter()`: seleção de observações (linhas)
+- `arrange()`: ordena as linhas com base em variáveis 
+- `group_by()`: agrupa observações com base em variáveis
+- `summarise()`: calcula sumários de grupos de observações
+
+## Exemplo 1 - `dplyr`
+
+```{r irisdplyr, echo=TRUE, eval=FALSE}
+glimpse(iris)
+```
+Exemplos para `mutate()`,`select()`, `filter()`, `arrange()`, `group_by()`,`summarise()`.
+
+## stringr - maniulação de *strings*
+
+[https://stringr.tidyverse.org/index.html](https://stringr.tidyverse.org/index.html)
+
+## `forcats` - manipulação de fatores
+
+[https://forcats.tidyverse.org/reference/index.html](https://forcats.tidyverse.org/reference/index.html)
+
+## Combinando `stringr`, `dplyr`, `tidyr` e `forcats`
+
+```{r tidyrdplyr, eval=FALSE, echo=TRUE}
+who_tidy <- who %>% 
+    pivot_longer(cols = starts_with('new'),
+                 names_to = 'temp_names',
+                 values_to = 'freq',
+                 values_drop_na = TRUE) %>% 
+    mutate(prefix = str_sub(temp_names,1,3),
+           diag = str_sub(temp_names,4,6),
+           gender = str_sub(temp_names,8,8),
+           age_range = str_sub(temp_names,9)) %>%
+    mutate_if(is.character,as_factor) %>% 
+    mutate(diag = fct_recode(
+        diag,
+        'sp'='_sp','sn'='_sn','ep'='_ep'
+        )) %>% 
+    mutate(age_range = fct_recode(
+        age_range, '0-14'='014' , '15-24'='1524', '25-34' = '2534', '35-44' = '3544' , '45-54' = '4554', '55-64' = '5564', '65+' = '65'
+        )) %>% 
+    select(-prefix)
+    
+    
+
+dim(who_tidy)
+head(who_tidy)
+glimpse(who_tidy)
+summary(who_tidy)
+levels(who_tidy$prefix)
+levels(who_tidy$diag)
+levels(who_tidy$age_range)
+
+```
+
+## Importante 
+
+**_NUNCA_ substitua os dados originais!**
+
+Os dados 'limpos' devem ser um produto automatizado dos dados originais, salvos em um arquivo diferente
+
+Isso garante a integridade e transparência. 
+
+## Prática Interativa
+
+Organizando os datasets anteriores:
+
+- tabela_do_capeta.xlsx
+- plot_florestal.xlsx
+- turbidez.csv
