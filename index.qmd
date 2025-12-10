@@ -14,7 +14,7 @@ format: html
 
 ### Aula 2 - Gerenciamento de Dados
 
-[Slides Aula 2](slides/aula_2.dpf)
+[Slides Aula 2](slides/aula_2.pdf)
 
 Dados para Aula 2:
 
@@ -28,4 +28,3 @@ Dados para Aula 2:
 
 [Arquivo Parquet (Vôos)](data/flights-1m.parquet)
 
-### Aula 3
