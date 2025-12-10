@@ -44,6 +44,9 @@ Quem é o seu principal colaborador?
 
 - Ex: Data, hora, local, coletor, instrumento, condições ambientais, unidades, nomes de variáveis, nomenclatura dos arquivos, organização das pastas. etc.
 
+Exemplo: exemplo_metadado.txt
+
+Exemplo: [https://zenodo.org/records/13887881](https://zenodo.org/records/13887881)
 
 ## O gerenciamento de dados começa no campo/laboratório
 
@@ -93,7 +96,7 @@ Quem é o seu principal colaborador?
 
 5. Tente digitar os dados o mais rápido possível - enquanto os detalhes do trabalho ainda estão frescos na sua cabeça.
 
-Usar vaderno/planilha vs. entrar dados direto no PC/tablet/telefone?
+Caderno/planilha vs. coletar dados direto no PC/tablet/telefone?
 
 ## Digitando dados
 
@@ -101,7 +104,7 @@ Qual software você usa pra digitar seus dados?
 
 ::: {.incremental}
 
-- Excel: cuidado com a formatação dos dados (exemplo)
+- Excel: cuidado com a formatação dos dados
 
 - Datas e horas: [formato ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
 
@@ -111,7 +114,69 @@ Qual software você usa pra digitar seus dados?
 
 :::
 
-# Exemplo 1 - Idenfique e corrija os problemas
+# Exemplo 1 - Preparando uma planilha para receber dados
+
+# Exemplo 2 - Idenfique e corrija os problemas
+
+## *Tidy* data
+
+Boa parte do trabalho de análise de dados consiste na organização / limpeza de dados.
+
+**Tidy Data:**
+[https://www.jstatsoft.org/article/view/v059i10](https://www.jstatsoft.org/article/view/v059i10)
+
+- Cada variável é uma coluna
+
+- Cada observação é uma linha
+
+## Exemplo
+
+| Local     | 2023  | 2024  | 2025 |
+|-----------|-------|-------|------|
+| Fazenda A | 12/50 | 13/45 | 9/52 |
+| Fazenda B | 8/35  | 10/40 | 7/38 |
+| Fazenda C | 8/42  | 5/37  | 3/51 |
+
+: Tabela 1. Número de fatalidades em relação ao número de animais infectados, para três diferentes fazendas entre 2023-2025.  
+
+Quantas variáveis tem essa tabela?
+
+## Exemplo 
+
+::: {.incremental}
+
+- Local/Fazenda
+- Ano
+- Número de animais infectados
+- Número de fatalidades
+:::
+
+. . . 
+
+Como organizar essa tabela de maneira *tidy*?
+
+## Exemplo
+
+| Local     | ano  | infectado | fatalidade |
+|-----------|------|-----------|------------|
+| Fazenda A | 2023 | 50        | 12         |
+| Fazenda A | 2024 | 45        | 13         |
+| Fazenda A | 2025 | 52        | 9          |
+| Fazenda B | 2023 | 35        | 8          |
+| Fazenda B | 2024 | 40        | 10         |
+| Fazenda B | 2025 | 38        | 7          |
+| Fazenda C | 2023 | 42        | 8          |
+| Fazenda C | 2024 | 37        | 5          |
+| Fazenda C | 2025 | 51        | 3          |
+
+
+## Discussão em pares
+
+- Que dados você está coletado / planeja coletar?
+- Como esses dados estão sendo organizados e armazenados?
+- Coomo você acha que pode melhorar essa organização?
+- Se o seu computador desaparecer agora, o que aconteceria com o seu trabalho?
+
 
 # Prática: Configurando o RStudio para trabalhar
 
@@ -171,21 +236,8 @@ meu_projeto
 
 Escolha sua favorita - mas seja **consistente**!
 
-
 # Exemplo: criando um projeto no RStudio
 
-## *Tidy* data
-
-Boa parte do trabalho de análise de dados consiste na organização / limpeza de dados.
-
-**Tidy Data:**
-[https://www.jstatsoft.org/article/view/v059i10](https://www.jstatsoft.org/article/view/v059i10)
-
-- Cada variável é uma coluna
-
-- Cada observação é uma linha
-
-- Cada tabela é um contexto
 
 
 ## Armazenando Dados
@@ -194,15 +246,22 @@ Boa parte do trabalho de análise de dados consiste na organização / limpeza d
 
 Qual o melhor formato para armazenamento de dados estruturados?
 
-- Excel: xls, xlsx
+- Excel (xls, xlsx): incluem informações sobre o tipo de dado, mas não é um formato universal. 
 
-- CSV (Comma Separated Values)
+- Texto (csv, tsv): extremamente simples, universalmente acessíveis, mas não guardam informação sobre o tipo de dado.
 
-- [Parquet](https://parquet.apache.org/)
-
-- Estratégia Mista: um formato para uso e outro para armazenamento
+- [Parquet](https://parquet.apache.org/): formato aberto desenvolvido especialmente para armazenamento eficiente de dados. Recemente se tornou  padrão em data science - mas já está sendo substituído.
 
 :::
+
+## Armazenando Dados
+
+Arquivos `RDS` e `RData`
+
+- Formato interno do R.
+- RData pode armazenar múltiplos objetos, RDS somente um objeto.
+- Formatos que só são entendidos pelo R.
+- OK para salvar dados intermediários durante o processamento.
 
 ## Armazenando Dados
 

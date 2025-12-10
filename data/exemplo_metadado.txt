@@ -1,0 +1,88 @@
+Nome_Dataset: WaterQuality_Amazon_2023
+Versão: 1.0
+Ultima_Atualizacao: 2023-11-15
+Autor: Lab de Ecologia Aquática – Universidade X
+Contato: contato.labeco@universidadex.edu
+
+---------------------------------------
+1. Descrição
+---------------------------------------
+Este dataset contém medições de qualidade da água coletadas em 35 pontos
+ao longo de rios de várzea na Amazônia durante o ano de 2023. O objetivo
+é caracterizar padrões sazonais relacionados ao ciclo hidrológico
+(cheia e seca).
+
+---------------------------------------
+2. Variáveis
+---------------------------------------
+Site_ID:
+    Tipo: string
+    Descrição: Identificador único para cada ponto de coleta.
+
+Date:
+    Tipo: date (YYYY-MM-DD)
+    Descrição: Data da amostragem.
+
+Water_Level_m:
+    Tipo: numeric
+    Unidade: metros
+    Descrição: Altura do nível da água registrada no momento da coleta.
+
+pH:
+    Tipo: numeric
+    Unidade: adimensional
+    Descrição: pH da água medido in situ com sonda multiparâmetros.
+
+Dissolved_Oxygen_mgL:
+    Tipo: numeric
+    Unidade: mg/L
+    Descrição: Concentração de oxigênio dissolvido.
+
+Turbidity_NTU:
+    Tipo: numeric
+    Unidade: NTU
+    Descrição: Turbidez da água.
+
+Chlorophyll_ugL:
+    Tipo: numeric
+    Unidade: µg/L
+    Descrição: Concentração de clorofila-a obtida por fluorometria.
+
+---------------------------------------
+3. INFORMAÇÃO ESPACIAL
+---------------------------------------
+Região: Amazônia Central – Brasil
+Sistema de Coordenadas: WGS84
+Tipo de pontos: localizações fluviais georreferenciadas (latitude/longitude)
+
+---------------------------------------
+4. INFORMAÇÃO TEMPORAL
+---------------------------------------
+Período de coleta: Janeiro/2023 – Dezembro/2023
+Frequência: Mensal
+
+---------------------------------------
+5. METODOLOGIA
+---------------------------------------
+As amostras foram coletadas manualmente com garrafas Van Dorn e medidas
+in situ usando sondas YSI EXO2. Amostras para clorofila foram filtradas
+e analisadas em laboratório por fluorometria padrão EPA 445.0.
+
+---------------------------------------
+6. QUALIDADE DOS DADOS E LIMITAÇÕES
+---------------------------------------
+- Alguns pontos podem ter lacunas mensais devido a inacessibilidade.
+- Medições de turbidez podem ser afetadas por sedimentos grosseiros.
+- Valores extremos foram verificados visualmente, mas não removidos.
+
+---------------------------------------
+7. LICENÇA DE USO
+---------------------------------------
+Licença: Creative Commons Attribution 4.0 (CC-BY 4.0)
+Requisitos: Cite o autor ao utilizar o dataset.
+
+---------------------------------------
+8. CITAÇÃO
+---------------------------------------
+Laboratório de Ecologia Aquática (2023). WaterQuality_Amazon_2023.
+Universidade X. DOI: 10.12345/dataset.2023.01

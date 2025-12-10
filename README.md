@@ -7,11 +7,16 @@ Material do Curso:
 
 [Programa](handouts/informacoes_pre_curso.pdf)
 
-[Aula 1](slides/aula_1.pdf)
-    
+### [Aula 1 - Introdução](slides/aula_1.pdf)
+
+### [Aula 2 - Gerenciamento de Dados](slides/aula_2.dpf)
+
+Dados para Aula 2:
+
+[Exemplo de metadados](data/exemplo_metadado.txt)    
 [Planilha Excel Horrorosa](data/planilha_do_capeta.xlsx)
 [Plot Florestal (xlsx)](data/plot_florestal.xlsx)
 [Turbidez (csv)](data/turbidez.csv)
 
-
+### Aula 3
 
