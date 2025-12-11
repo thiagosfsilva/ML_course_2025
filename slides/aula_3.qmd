@@ -1,0 +1,97 @@
+---
+title: 'Aula 3 - Visualização de Dados'
+subtitle: 'Introdução ao aprendizado de máquina - UEMA 2025'
+author: 'Thiago S. F .Silva'
+date: 2025-12-10
+format: 
+    beamer:
+        theme: metropolis
+        urlcolor: blue
+        classoption: '`xcolor={dvipsnames}`{=latex}'
+        
+---
+
+# Parte III - Visualização de dados
+
+## Análise visual
+
+Analisar dados sem uma exploração gráfica é como ir a um encontro às escuras.
+
+. . .
+
+![](../figs/sapo.jpg){fig-align="center"}
+
+## Análise visual
+
+Analisar dados sem uma exploração gráfica é como ir a um encontro às escuras.
+
+Nós somos seres essencialmente visuais, com uma capacidade incrível de processar imagens. 
+
+## Por que gráficos?
+
+O "Quarteto de Anscombe"
+
+\tiny
+
+Anscombe, F.J., 1973. Graphs in Statistical Analysis. The American Statistician 27, 17–21
+
+\footnotesize
+
+```{r anscombehead, echo=T}
+head(anscombe)
+```
+
+## Quarteto de Anscombe
+
+\footnotesize
+
+```{r anscombemdels, echo=TRUE}
+round(lm(y1 ~ x1, data = anscombe)$coefficients,2)
+round(lm(y2 ~ x2, data = anscombe)$coefficients,2)
+round(lm(y3 ~ x3, data = anscombe)$coefficients,2)
+round(lm(y4 ~ x4, data = anscombe)$coefficients,2)
+```
+
+## Quarteto de Anscombe
+```{r anscombeplot}
+library(ggplot2)
+library(patchwork)
+
+p1 <- ggplot(anscombe, aes(x1,y1)) + geom_point() + geom_smooth(method = lm)
+p2 <- ggplot(anscombe, aes(x2,y2)) + geom_point() + geom_smooth(method = lm)
+p3 <- ggplot(anscombe, aes(x3,y3)) + geom_point() + geom_smooth(method = lm)
+p4 <- ggplot(anscombe, aes(x4,y4)) + geom_point() + geom_smooth(method = lm)
+
+(p1 + p2) / (p3 + p4)
+```
+
+## Melhor que o quartedo de Anscombe
+
+\footnotesize
+
+```{r datasaurus, echo=TRUE}
+library(datasauRus)
+library(dplyr)
+
+datasaurus_dozen %>% group_by(dataset) %>%
+    summarise(mean_x = mean(x), mean_y = mean(y), sd_x = sd(x),
+              sd_y = sd(y))
+
+```
+
+## Melhor que o quartedo de Anscombe
+
+```{r datasaurusplot}
+ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset))+
+  geom_point() +
+  theme(legend.position = "none")+
+  facet_wrap(~dataset, ncol = 3)
+```
+
+## Melhor que o quartedo de Anscombe
+
+```{r datasaurusplotdino}
+ggplot(datasaurus_dozen %>% filter(dataset=='dino'), aes(x = x, y = y, colour = dataset))+
+  geom_point(size=3, colour = 'black') +
+  theme(legend.position = "none")
+```
