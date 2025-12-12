@@ -8,15 +8,21 @@ format: html
 
 ## Material do Curso:
 
-### 09/12/2025: Aula 1 - Introdução
+### Aula 1 - Introdução (09/12/2025)
 
 [Slides Aula 1](slides/aula_1.pdf)
 
-### 10-11/12/2025: Aula 2 - Gerenciamento de Dados
+### Aula 2 - Gerenciamento de Dados (10 e 11/12/2025)
 
 [Slides Aula 2](slides/aula_2.pdf)
 
-| Dados para Aula 2: | Scripts criados durante a Aula 2 |
+### Aula 3 - Visualização de dados (12/12/2025)
+
+[Slides Aula 3](slides/aula_3.pdf)
+
+### Datasets e scripts criados durante o curso 
+
+| Datasets | Scripts |
 |--------------------|----------------------------------|
 |[Exemplo de metadados](data/exemplo_metadado.txt) | [`1_carrega_dados.R`](demos/1_carrega_dados.R) |
 |[Planilha do Capeta](data/planilha_do_capeta.xlsx)| [`2_explorando_tidyverse.R`](demos/2_explorando_tidyverse.R) |
@@ -24,6 +30,3 @@ format: html
 |[Turbidez (csv)](data/turbidez.csv)               | |
 |[Voos (parquet)](data/flights-1m.parquet) | |
 
-### 12/12/2025: Aula 3 - Visualização de dados
-
-[Slides Aula 3](slides/aula_3.pdf)
