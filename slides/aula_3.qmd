@@ -7,8 +7,8 @@ format:
     beamer:
         theme: metropolis
         urlcolor: blue
-        classoption: '`xcolor={dvipsnames}`{=latex}'
-        
+        include-in-header:
+          file: custom.tex
 ---
 
 # Parte III - Visualização de dados
@@ -19,7 +19,7 @@ Analisar dados sem uma exploração gráfica é como ir a um encontro às escura
 
 . . .
 
-![](../figs/sapo.jpg){fig-align="center"}
+![](../figs/sapo.jpg){fig-align="center" width=80%}
 
 ## Análise visual
 
@@ -57,15 +57,15 @@ round(lm(y4 ~ x4, data = anscombe)$coefficients,2)
 library(ggplot2)
 library(patchwork)
 
-p1 <- ggplot(anscombe, aes(x1,y1)) + geom_point() + geom_smooth(method = lm)
-p2 <- ggplot(anscombe, aes(x2,y2)) + geom_point() + geom_smooth(method = lm)
-p3 <- ggplot(anscombe, aes(x3,y3)) + geom_point() + geom_smooth(method = lm)
-p4 <- ggplot(anscombe, aes(x4,y4)) + geom_point() + geom_smooth(method = lm)
+p1 <- ggplot(anscombe, aes(x1,y1)) + geom_point(size=2) + geom_smooth(method = lm,se = FALSE)
+p2 <- ggplot(anscombe, aes(x2,y2)) + geom_point(size=2) + geom_smooth(method = lm,se = FALSE)
+p3 <- ggplot(anscombe, aes(x3,y3)) + geom_point(size=2) + geom_smooth(method = lm,se = FALSE)
+p4 <- ggplot(anscombe, aes(x4,y4)) + geom_point(size=2) + geom_smooth(method = lm,se = FALSE)
 
 (p1 + p2) / (p3 + p4)
 ```
 
-## Melhor que o quartedo de Anscombe
+## Melhor que o quarteto de Anscombe
 
 \footnotesize
 
@@ -79,7 +79,7 @@ datasaurus_dozen %>% group_by(dataset) %>%
 
 ```
 
-## Melhor que o quartedo de Anscombe
+## Melhor que o quarteto de Anscombe
 
 ```{r datasaurusplot}
 ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset))+
@@ -88,10 +88,58 @@ ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset))+
   facet_wrap(~dataset, ncol = 3)
 ```
 
-## Melhor que o quartedo de Anscombe
+## Melhor que o quarteto de Anscombe
 
 ```{r datasaurusplotdino}
 ggplot(datasaurus_dozen %>% filter(dataset=='dino'), aes(x = x, y = y, colour = dataset))+
   geom_point(size=3, colour = 'black') +
   theme(legend.position = "none")
 ```
+
+## A gramática dos gráficos
+
+:::: {.columns}
+
+::: {.column width="60%"}
+- Conceito criado por Leland Wilkinson
+- Como pensar em gráficos de maneira sistemática
+:::
+
+::: {.column width="40%"}
+![](../figs/grammar_graphics.jpg){fig-align="center"}
+:::
+
+::::
+
+## A gramática dos gráficos
+
+Um gráfico é composto pelos seguintes elementos:
+
+::: {.incremental}
+- **Dados (*data*):** quais dados se está plotando
+- **Estética (*aesthetics*):** como estes dados são representados (eixos, forma, - tamanho, cor)
+- **Escala (*Scale*)**: qual o intervalo dos dados a ser visualisado?
+- **Geometria (*geometry*):** que tipo de representação gráfica será usada?
+- **Estatísticas (*statistics*):** como os dados originais estão sendo resumidos no - gráfico?
+- **Facetas (*facets*):** como os dados devem ser separados em painéis?
+:::
+
+## A gramática dos gráficos
+
+![](../figs/grammar_graphics_elements.png){fig-align="center"}
+
+## Exemplo
+
+\scriptsize
+
+Dados: `iris`, Estética: `x = Sepal.Length, y = Sepal.Width, cor = Species, valores = cículos`, Escala: `x=0:8, y=2:4.5`,  Geometria = `pontos`, Estatística = `regressão`, Facetas = `Species`
+
+```{r, fig.width=15, fig.height=8}
+ggplot(iris,aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  facet_grid(cols=vars(Species)) +
+  theme_bw(base_size = 30)
+
+```
+

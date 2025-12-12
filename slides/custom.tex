@@ -1,0 +1,8 @@
+% Source - https://stackoverflow.com/a
+% Posted by Jan
+% Retrieved 2025-12-11, License - CC BY-SA 4.0
+
+\definecolor{codefontcolor}{RGB}{125,18,186}
+\definecolor{codebggray}{HTML}{f8f9fa}
+\let\textttOrig\texttt
+\renewcommand{\texttt}[1]{\textttOrig{\colorbox{codebggray}{\textcolor{codefontcolor}{#1}}}}

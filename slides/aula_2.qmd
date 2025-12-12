@@ -7,8 +7,8 @@ format:
     beamer:
         theme: metropolis
         urlcolor: blue
-        classoption: '`xcolor={dvipsnames}`{=latex}'
-        
+        include-in-header:
+          file: custom.tex
 ---
 
 # Aquecimento: dado vs informação?
@@ -331,7 +331,7 @@ glimpse(plot_florestal)
 ```
 
 ## Resultado {visibility='hidden'}
-\footnotesize
+\tiny
 
 ```{r florestplotres}
 library(readxl)
