@@ -11,7 +11,7 @@ format:
           file: custom.tex
 ---
 
-# Parte III - Visualização de dados
+# Parte I - Considerações gerais
 
 ## Análise visual
 
@@ -54,7 +54,7 @@ round(lm(y4 ~ x4, data = anscombe)$coefficients,2)
 
 ## Quarteto de Anscombe
 ```{r anscombeplot}
-library(ggplot2)
+library(tidyverse)
 library(patchwork)
 
 p1 <- ggplot(anscombe, aes(x1,y1)) + geom_point(size=2) + geom_smooth(method = lm,se = FALSE)
@@ -143,3 +143,192 @@ ggplot(iris,aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 
 ```
 
+# Parte II - O pacote `ggplot2`
+
+## O pacote `ggplot2`
+
+Uma implementação da gramática dos gráficos que segue a filosofia *tidyverse*.
+
+[https://ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/)
+
+[ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/)
+
+Funções: `ggplot()`, `geom_*()`, `scale_*()`, `stat_*`, `coord_*()`. etc.
+
+## Exemplos
+
+Exemplo em R usando o dataset `iris`
+
+# Parte III - Principais tipos de gráficos
+
+## Tipos de gráficos e seus usos
+
+A escolha do tipo de gráfico é ditada principalmente por:
+
+- número de variáveis (dimensões)
+- tipo de variável (categórica vs. contínua)
+- relação entre valores (séries vs. comparações)
+
+## Gráficos 1-D
+
+Quais tipos comuns de gráficos usamos para mostrar apenas uma variável?
+
+::: {.incremental}
+
+- Histograma
+- 
+
+:::
+
+## Tipos de Gráficos - 1 variável: Histograma}
+  
+**Histograma**  
+
+- Adequado para mostrar distribuições.
+- Pode ser usado tanto para dados categóricos quanto contínuos.
+
+É importante otimizar o número de  subdivisões (*bins*)
+
+
+## Dot Plot
+
+Similar ao histograma, o *dot plot* é adequado para datasets com poucas observações
+
+- Cada observação é um ponto
+- A largura do ponto equivale ao *bin* do histograma
+- Vantagem: você consegue facilmente contar o numero de observações.
+
+
+## Tipos de Gráficos - 1 variável: Densidade
+
+Gráficos de densidade tentam dar uma visão mais contínua da distribuição dos dados
+
+- Utilizam um *kernel* para suavizar os dados
+- A largura do *kernel* (*bandwidth*) muda a aparência do gráfico.
+
+## Tipos de Gráficos - 1 variável: Densidade
+
+![](../figs/Comparison_of_1D_histogram_and_KDE.png){fig.align='center'}
+
+## Tipos de Gráficos - 2 variáveis: Gráfico de Barras
+
+- Adequado para mostrar proporções, especialmente apropriado para contagens de variáveis categóricas
+- Pode ser mostrado lado a lado ou empilhado
+-Transmite a impressão de um dado **cumulativo**
+- Não é recomendado para valores pontuais (ex: média)
+
+
+## Tipos de Gráficos - 2 variáveis: Gráfico de Pizza
+  
+Gráficos de pizza servem para:
+
+. . .
+
+- Nada!
+- Nosso cérebro é muito mais apto em julgar comprimentos (barras) do que áreas ou ângulos. 
+- Sempre que você pensar em fazer um gráfico de pizza, um gráfico de barras é melhor
+
+## Tipos de Gráficos - 2 variáveis: diagrama de dispersão (*scatterplot*)
+
+- Um dos gráficos mais úteis em estatística
+- Serve para visualizar duas variáveis contínuas
+- Cuidado ao unir os pontos com linhas, pois isso passa uma noção de continuidade!
+
+## Tipos de Gráficos - 2 variáveis: intervalos, barras de erro, etc
+
+- Utilizados para mostrar *estatísticas* ao invés de dados brutos
+- Podem ser combinados com outros tipos de gráfico para indicar incerteza
+
+## Tipos de Gráficos - 2 variáveis: Gráfico de Área
+  
+- Pode ser visto como uma versão contínua do gráfico de barras
+- Mostra diferenças ponto a ponto e cumulativas
+- Não deve ser usado se a área sob a curva não fizer sentido para os dados plotados
+- A ordem do empilhamento pode afetar a percepção 
+- Se a variável x não for contínua, melhor usar barras empilhadas
+  
+
+## Tipos de Gráficos - 2 variáveis: Boxplot
+
+- Usado para combinações entre variáveis contínuas e categóricas 
+- Na opinião de muitos, um dos gráficos mais informativos que existem 
+- Combina as propriedades de um histograma e de um scatterplot
+- Faz uso dos quantis para uma descrição robusta dos dados 
+
+## Tipos de Gráficos - 2 variáveis: *Violin Plot*
+
+- Tentativa de ir além do boxplot
+- Combina as propriedades de um gráfico de densidades e de um scatterplot
+- Pode ficar estranho se as distribuições não forem bem-comportadas 
+
+## Combinando mais de duas variáveis ... sem usar "3D"
+- Gráficos '3D' são dependentes de perspectiva, e não enfatizam bem as diferenças 
+- São uma boa ferramenta de visualização se puderem ser interativos 
+- Para exibição em papel/tela, dificultam a interpretação
+- Ao invés de usar múltiplos eixos, podemos explorar combinações de *estética* e *geometria* (cor, forma, etc.)
+
+## Exemplo - macrófitas amazônicas
+
+Dataset coletado durante meu pós-doutorado. 
+
+[rich_env_june.csv]()
+
+```{r envdata, eval=FALSE, echo=TRUE}
+library(readr)
+
+mac_data <- read_csv('../data/rich_env_jun.csv')
+glimpse(mac_data)
+
+```
+## 2 variáveis
+
+Nitrogênio Total vs. Fósforo Total
+
+## 3 variáveis
+
+Nitrogênio Total vs. Fósforo Total vs. riqueza de espécies
+
+## 4 variáveis
+
+Nitrogênio Total vs. Fósforo Total vs. riqueza de espécies vs. profundidade
+
+## 5 variáveis
+
+Nitrogênio Total vs. Fósforo Total vs. riqueza de espécies vs. profundidade
+
+## Elementos de um bom gráfico}
+  
+- Foco na informação que se quer enfatizar 
+- Quanto menor a razão tinta/papel, melhor 
+- Selecione e ordene suas variáveis de acordo com a pergunta a ser respondida 
+- Cores e formas só devem ser usadas se também trouxerem informação! 
+
+## Qual a pergunta a ser respondida?
+
+```{r}
+iris_2 <- iris %>% 
+  pivot_longer(cols = c(Sepal.Length, Petal.Length),
+                                names_to = 'Part',
+                                values_to = 'Length') %>%
+  mutate(Part = as.factor(str_sub(Part,1,5))) %>% 
+  select(-c(Sepal.Width,Petal.Width))
+
+head(iris_2)
+```
+
+## Qual a pergunta a ser respondida?
+
+Diferença entre partes, para cada espécie?
+
+```{r}
+ggplot(iris_2, aes(Part, Length)) + geom_boxplot() + facet_grid(cols=vars(Species))
+```
+
+## Qual a pergunta a ser respondida?
+
+Ou a diferença entre espécies, para cada parte?
+
+```{r}
+ggplot(iris_2, aes(Species, Length)) + geom_boxplot() + facet_grid(cols=vars(Part))
+```
+# Parte 4 - Praticando Aulas 2 e 3

@@ -27,6 +27,7 @@ format: html
 |[Exemplo de metadados](data/exemplo_metadado.txt) | [`1_carrega_dados.R`](demos/1_carrega_dados.R) |
 |[Planilha do Capeta](data/planilha_do_capeta.xlsx)| [`2_explorando_tidyverse.R`](demos/2_explorando_tidyverse.R) |
 |[Plot Florestal (xlsx)](data/plot_florestal.xlsx) | |
-|[Turbidez (csv)](data/turbidez.csv)               | |
+|[Turbidez (csv)](data/turbidez.csv)       | |
 |[Voos (parquet)](data/flights-1m.parquet) | |
+|[Macrófitas (csv)](data/rich_env_jun.csv) | |
 
