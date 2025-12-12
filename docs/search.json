@@ -11,6 +11,6 @@
     "href": "index.html#material-do-curso",
     "title": "Curso Machine Learning UEMA 2025",
     "section": "Material do Curso:",
-    "text": "Material do Curso:\n\nAula 1 - Introdução\nSlides Aula 1\n\n\nAula 2 - Gerenciamento de Dados\nSlides Aula 2\nDados para Aula 2:\nExemplo de metadados\nPlanilha do Capeta\nPlot Florestal (xlsx)\nTurbidez (csv)\nArquivo Parquet (Vôos)"
+    "text": "Material do Curso:\n\n09/12/2025: Aula 1 - Introdução\nSlides Aula 1\n\n\n10-11/12/2025: Aula 2 - Gerenciamento de Dados\nSlides Aula 2\n\n\n\nDados para Aula 2:\nScripts criados durante a Aula 2\n\n\n\n\nExemplo de metadados\n1_carrega_dados.R\n\n\nPlanilha do Capeta\n2_explorando_tidyverse.R\n\n\nPlot Florestal (xlsx)\n\n\n\nTurbidez (csv)\n\n\n\nVoos (parquet)\n\n\n\n\n\n\n12/12/2025: Aula 3 - Visualização de dados\nSlides Aula 3"
   }
 ]
