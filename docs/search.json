@@ -11,6 +11,6 @@
     "href": "index.html#material-do-curso",
     "title": "Curso Machine Learning UEMA 2025",
     "section": "Material do Curso:",
-    "text": "Material do Curso:\n\nAula 1 - Introdução (09/12/2025)\nSlides Aula 1\n\n\nAula 2 - Gerenciamento de Dados (10 e 11/12/2025)\nSlides Aula 2\n\n\nAula 3 - Visualização de dados (12/12/2025)\nSlides Aula 3\n\n\nAula 4 - Introdução ao Machine Learning (15/12/2025)\nSlides Aula 3\n\n\nDatasets e scripts criados durante o curso\n\n\n\nDatasets\nScripts\n\n\n\n\nExemplo de metadados\n1_carrega_dados.R\n\n\nPlanilha do Capeta\n2_explorando_tidyverse.R\n\n\nPlot Florestal (xlsx)\n3_explorando_ggplot2.R\n\n\nTurbidez (csv)\n4_preprocessamento_turbidez.R\n\n\nVoos (parquet)\n\n\n\nMacrófitas (csv)"
+    "text": "Material do Curso:\n\nAula 1 - Introdução (09/12/2025)\nSlides Aula 1\n\n\nAula 2 - Gerenciamento de Dados (10 e 11/12/2025)\nSlides Aula 2\n\n\nAula 3 - Visualização de dados (12/12/2025)\nSlides Aula 3\n\n\nAula 4 - Introdução ao Machine Learning (15/12/2025)\nSlides Aula 3\n\n\nDatasets e scripts criados durante o curso\n\n\n\nDatasets\nScripts\n\n\n\n\nExemplo de metadados\n1_carrega_dados.R\n\n\nPlanilha do Capeta\n2_explorando_tidyverse.R\n\n\nPlot Florestal (xlsx)\n3_explorando_ggplot2.R\n\n\nTurbidez (csv)\n4_preprocessamento_turbidez.R\n\n\nVoos (parquet)\n5_exemplo_RF.R\n\n\nMacrófitas (csv)"
   }
 ]
