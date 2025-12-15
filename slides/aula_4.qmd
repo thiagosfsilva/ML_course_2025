@@ -1,0 +1,427 @@
+---
+title: "Aula 4 - Machine Learning"
+subtitle: 'Introdução ao aprendizado de máquina - UEMA 2025'
+author: 'Thiago S. F .Silva'
+date: 2025-12-15
+format: 
+    beamer:
+        theme: metropolis
+        urlcolor: blue
+        include-in-header:
+          file: custom.tex
+---
+
+# Parte I - Introdução
+
+## Revisitando: *machine learning* vs. estatística
+
+- Focado em **predição** 
+- Sem valor-p, intervalo de confiança, pressuposições, etc.
+- Pouca ou nenhuma **interpretabilidade** do modelo.
+- Sem preocupação com o 'mínimo modelo' ou parsimônia. 
+- Os melhores algoritmos de ML não requerem linearidade, normalidade, independência, etc.
+- Bons métodos estatísticos (ex. modelos lineares) são inferiores para ML.
+
+## Exemplo: Boston Housing Price
+
+\scriptsize
+
+```{r BHPload, echo=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(tidyfit)
+data <- MASS::Boston
+str(data)
+```
+
+## Regressão Linear vs Random Forests
+
+```{r lmvsrf, echo=FALSE}
+# For reproducibility
+set.seed(128)
+ix_tst <- sample(1:nrow(data), round(nrow(data)*0.1))
+
+data_trn <- data[-ix_tst,]
+data_tst <- data[ix_tst,]
+
+model_frame <- data_trn %>% 
+  regress(medv ~ .,
+          OLS = m("lm"),
+          RF = m("rf")
+          )
+
+model_frame %>% 
+  # Generate predictions
+  predict(data_tst) %>% 
+  # Calculate RMSE
+  yardstick::rmse(truth, prediction)
+```
+## Terminologia
+
+- **Treinamento:** cálculo dos parâmetros do modelo a partir dos dados. 
+- **Tuning (otimização):** otimização dos *hyperparâmetros*  do modelo.
+- **Validação:** avaliação do modelo durante o *tuning*.
+- **Teste:** avaliação final do modelo usando dados de teste.
+- **Target (Alvo):** variável dependente / alvo da predição.
+- **Feature (feição):** variáveis preditoras/variáveis independentes.
+
+## Terminologia
+
+- **Classificação:** qualquer problema/modelo que produz resultados *categóricos*.
+- **Regressão:** qualquer problema/modelo que produz resultados *contínuos*.
+
+No caso específico de visão computacional:
+
+![](../figs/segvsclasvsdecjpg.jpg)
+
+## Machine learning no R
+
+- O pacote [`tidymodels`](https://www.tidymodels.org/)
+- O livro ['Tidy Models with R'](https://www.tmwr.org/).
+- O livro mais antigo [`Applied Predictive Modeling with R`](https://link.springer.com/book/10.1007/978-1-4614-6849-3) ainda é bom para *entender* ML.
+- O website do pacote Python [Scikit-learn](https://scikit-learn.org/stable/) é excelente para explicações sobre algoritmos específicos, independente da linguagem.
+
+## Os passos de uma análise de ML
+
+1. ~~Preparação dos dados~~
+2. ~~Análise descritiva~~
+3. ~~Visualização de dados~~
+4. **Divisão dos dados em *treinamento* e *teste* **
+5. **Escolha do algoritmo**
+5. **Otimização e validação do modelo** 
+6. **Teste do modelo**
+
+## Algoritmos de Machine Learning
+
+Existem literalmente dezenas de algoritmos de machine learning. Vamos focar nos mais comuns:
+
+- Árvores de decisão (*decision trees*)
+- *Support Vector Machine* (SVM)
+- Métodos de *Ensemble*:
+    - Random Forests (*bagging*)
+    - LightGBM (*boosting*)
+
+## Árvores de Decisão
+
+\small
+
+Um dos métodos mais 'básicos' de ML. Suas vantagens são:
+
+- Fáceis de compreender
+- Robustos com relação aos dados
+- Não-Paramétricos
+- Funcionam pra Classificação e Regressão.
+
+Desvantagens:
+
+- Árvores de decisão são propensas ao *overfitting*, e requerem métodos de "poda" (*pruning*) para manter a generalidade.
+- As predições não são contínuas.
+- Sensíveis a dados desbalanceados.
+
+## Overfitting
+
+\small 
+
+Algoritmos de ML podem aprender "bem demais". Isso é chamado de *overfitting* (ajuste excessivo). Normalmente detectado por uma acurácia alta durante a otimização, e baixa durante o teste.
+
+![](../figs/Overfitting.jpg){width=50%, fig-align="center"}
+
+## Dados desbalanceados
+
+Quando uma ou mais classes dominam a quantidade de amostras sobre as outras.
+
+```{r imbalanceplot}
+set.seed(46)
+library(ggplot2)
+df <- data.frame(x = runif(50,0,1),y = runif(50,0,1), classe=c(rep('C',89),rep('A',5),rep('B',6)))
+
+ggplot(df,aes(x,y,color=classe)) + geom_point(size=3) + theme_gray(base_size = 25)
+```
+## Árvores de Decisão
+
+![](../figs/decision-tree.png)
+
+[https://www.youtube.com/watch?v=ZVR2Way4nwQ](https://www.youtube.com/watch?v=ZVR2Way4nwQ)
+
+## Classificando o dataset *iris*
+
+\small
+
+`Petal.Width`,`Petal.Lenght`,`Sepal.Width`,`Sepal.Length` são as nossas *features*. 
+```{r headiris}
+head(iris)
+```
+
+## Classificando o dataset *iris*
+
+Nosso nó inicial contém todas as amostras. Queremos achar um limiar para um dos quatro *features*  que maximiza a separação entre os grupos. 
+
+Como 'medir' essa separação?
+
+**Pureza do Nó (Node Purity):** quão 'misturado' é o dataset após a separação?
+
+## Classificando o dataset *iris*
+
+**Exemplo:** Índice de Pureza de Gini
+
+$ Gini = 1 - \sum_{i=1}^{C}{p_i * (1-p_1)}$
+
+- Máximo de Pureza: 0
+- Mínimo: 0.5 (duas classes)
+- 0.6667 (três classes), etc.
+
+## Classificando o dataset *iris*
+
+Então podemos testar diferentes limiares de separação para diferentes *features*, e escolher aquele que maximiza a pureza (minimiza o índice Gini).
+
+## Classificando o dataset *iris*
+
+```{r ggpairsiris}
+library(GGally)
+ggpairs(iris, columns = 1:4, ggplot2::aes(colour = Species), upper = 'blank')
+```
+
+## Classificando o dataset *iris*
+
+\small
+
+Para separar a espécie *setosa*, basta um limiar de `Petal.Length > 2.5`.
+
+```{r ggplotiris1}
+ggplot(iris,aes(Petal.Length,Petal.Width,colour = Species)) + 
+    geom_point() + 
+    geom_vline(xintercept = 2.5) +
+    theme_gray(base_size = 25)
+```
+## Classificando o dataset *iris*
+
+Diferenciação entre *versicolor* e *virginica* é mais complexa. Pra isso serve o computador!
+
+```{r rodarpart1, echo=TRUE}
+library(rpart)
+library(rpart.plot)
+model1 <- rpart(Species ~ ., data = iris,
+                method = "class")
+```
+## Classificando o dataset *iris*
+
+\footnotesize
+
+```{r plotrpart1, echo=TRUE}
+rpart.plot(model1, box.palette = "RdBu", shadow.col = "gray",
+           fallen.leaves = TRUE)
+```
+
+## Classificando o dataset *iris*
+
+```{r rpartdecbounds}
+ggplot(iris,aes(Petal.Length,Petal.Width,colour = Species)) + 
+    geom_point() + 
+    geom_vline(xintercept = 2.5) +
+    geom_hline(yintercept=1.75) +
+    theme_gray(base_size = 25)
+```
+
+## Classificando o dataset *iris*
+
+Poderíamos ir além?
+
+```{r rpartoverfit, echo=TRUE, eval=FALSE}
+model2 <- rpart(Species ~ ., 
+                data = iris,
+                method = "class", 
+                control = rpart.control(cp = 0,
+                                        minsplit = 2))
+```
+
+## Classificando o dataset *iris*
+
+```{r rpartoverfitview, echo=FALSE, eval=TRUE}
+model2 <- rpart(Species ~ ., data = iris, method = "class", control = rpart.control(cp = 0, minsplit = 2))
+rpart.plot(model2, box.palette = "RdBu", shadow.col = "gray",
+           fallen.leaves = TRUE)
+```
+
+## Classificando o dataset *iris*
+
+Nesse novo modelo, mudamos dois *hiperparâmetros*:
+
+- `cp`: controla o grau de complexidade da árvore
+- `minsplit`: numero mínimo de observações após uma separação.
+
+```{r rpartaccuracy}
+prediction1 <- predict(model1, type = "class")
+prediction2 <- predict(model2, type = "class")
+
+confMat1 <- table(actual = iris$Species, predicted = prediction1)
+confMat2 <- table(actual = iris$Species, predicted = prediction2)
+
+accuracy1 <- sum(diag(confMat1)) / sum(confMat1)
+accuracy2 <- sum(diag(confMat2)) / sum(confMat2)
+print(paste0("Acurácia M1 (cp = 0.01, minsplit = 20): ", accuracy1*100,'%'))
+print(paste0("Acurácia M2 (cp = 0, minsplit = 2 ): ", accuracy2*100,'%'))
+```
+
+Qual o melhor modelo?
+
+## De árvores para florestas
+
+As árvores de decisào funcionam bem com problemas simples, mas:
+
+- Perdem eficiência em problemas complexos
+
+- Tem uma grande tendência ao overfitting
+
+## Random Forests
+
+**Random Forests (Florestas Aleatórias):** um modo de deixar o uso de árvores de decisão mais robusto e poderoso.
+
+Criado por Leo Breiman em 2001:  [https://doi.org/10.1023/A:1010933404324](https://doi.org/10.1023/A:1010933404324)
+
+![](../figs/RF_citations.jpg)
+
+## Random Forests
+
+A ideia é incrivelmente simples:
+
+- Ao invés de uma árvore gigante, crie diversas pequenas árvores
+- Cada árvore prevê corretamente só uma pequena parte dos dados (*weak learner*)
+- A classificação/regressão final é o *consenso* entre todas as árvores.
+- Em ML, essa técnica é chamada de *bagging* (bootstrap + aggregation).
+
+## Random Forests
+
+Esse 'truque' de usar vários modelos para gerar uma predição final é chamado de *ensemble* (conjunto). 
+
+Ele pode ser também utilizado para combinar resultados de diferentes algoritmos, buscando assim maior robustez.
+
+[https://www.youtube.com/watch?v=v6VJ2RO66Ag&t=61s](https://www.youtube.com/watch?v=v6VJ2RO66Ag&t=61s)
+
+## Random Forests
+
+O algoritmo *Random Forest* é extremamente robusto e poderoso, e fácil de treinar e otimizar. Os principais *hiperparâmetros* a ser otimizados são:
+
+- **`n_estimators`**: quantas árvores? Mais árvores = melhores modelos = maior tempo de computação.
+- **`max_features`:** o número máximo de features considerado a cada separação, O padrão é `sqrt(total_features)`. Serve para criar árvores mais diferentes.
+- `max_depth`:** profundidade máxima de cada árvore (reduz overfitting)
+- `min_samples_split`: número mínimo de amostras que um nó deve ter pra ser considerado pra mais uma separação.
+- `min_samples_leaf`: número mínimo de amostras nas folhas (nós terminais). 
+
+## Um exemplo usando o pacote `ranger`
+
+Existem mais de um pacote no `R` que implementam o Random Forest:
+
+- `ranger`
+- `randomForest`
+- `partykit`
+- `aorsf`
+
+Vamos usar o pacote `ranger` para um exemplo.
+
+## Quais dados vamos modelar?
+
+**Breast Cancer Winsconsin:** um dataset com dados reais derivados de imagens de células cancerígenas, utilizados para diagnosticar entre maligno/benigno.
+
+Disponível no R no pacote `mlbench`, um pacote com vários datasets clássicos usados como *benchmark* no mundo do ML.
+
+[Breast Cancer Wisconsin (Diagnostic)](https://doi.org/10.24432/C5DW2B)
+
+## Quais dados vamos modelar?
+
+```{r headbc, echo = TRUE, eval=FALSE}
+data("BreastCancer", package = "mlbench")
+head(BreastCancer)
+str(BreastCancer)
+```
+
+## Primeiro Passo - Inspecionando os dados
+
+```{r inspbc, echo = TRUE, eval=FALSE}
+library(GGAlly)
+summary(BreastCancer)
+ggpairs(BreastCancer, columns = c(2:5,11))
+ggpairs(BreastCancer, columns = c(6:10,11))
+
+```
+
+## Segundo Passo - Separando os dados em treino e teste
+
+```{r splitbc, echo = TRUE, eval=FALSE}
+set.seed(42)
+nrow(BreastCancer) * 0.7
+row_inds <- c(1:nrow(BreastCancer))
+train_inds <- sample(row_inds,490, replace = FALSE)
+
+train_df <- BreastCancer[train_inds,-1]
+test_df <- BreastCancer[-train_inds,-1]
+```
+
+## Terceiro Passo - Ajuste do modelo
+```{r fitbc, echo = TRUE, eval=FALSE}
+library(ranger)
+
+m1 <- ranger(Class ~ ., data = train_df)
+
+m1$prediction.error
+```
+
+## Quarto passo - otimização do modelo
+
+\small
+
+```{r tunebc, echo = TRUE, eval=FALSE}
+tune_df <- data.frame(numtree_vals = c(10, 50,100,500,1000),
+                      error = NA)
+tune_df
+
+for(n in c(1:nrow(tune_df))){
+    temp_mod <- ranger(Class ~ ., data = train_df,
+                       num.trees = tune_df$numtree_vals[n])
+    tune_df$error[n] <- temp_mod$prediction.error
+} 
+
+tune_df
+```
+
+## Quarto passo - otimização do modelo
+
+\small
+
+```{r tunebc2, echo = TRUE, eval=FALSE}
+tune_df <- data.frame(
+    numtree_vals = rep(c(10, 50,100,500,1000),3),
+    mtry_vals = rep(c(2,4,6),3, each=5), 
+    error = NA
+    )
+tune_df
+
+for(n in c(1:nrow(tune_df))){
+    temp_mod <- ranger(Class ~ ., data = train_df,
+                       num.trees = tune_df$numtree_vals[n],
+                       mtry = tune_df$mtry_vals[n])
+    tune_df$error[n] <- temp_mod$prediction.error
+} 
+
+tune_df
+
+which(tune_df$error == min(tune_df$error))
+
+tune_df[5,]
+```
+
+## Quinto Passo - Teste do modelo
+
+```{r testbc, echo = TRUE, eval=FALSE}
+final_mod <- ranger(Class ~ ., data = train_df,
+                       num.trees = 1000,
+                       mtry = 2)
+pred <- predict(final_mod,test_df)
+
+conf_mat <- table(test_df$Class, pred$predictions)
+
+acuracia <- sum(diag(conf_mat)) / sum(conf_mat)
+
+erro <- 1-acuracia
+
+```
+

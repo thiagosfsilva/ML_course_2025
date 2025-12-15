@@ -2,7 +2,7 @@
 title: 'Aula 3 - Visualização de Dados'
 subtitle: 'Introdução ao aprendizado de máquina - UEMA 2025'
 author: 'Thiago S. F .Silva'
-date: 2025-12-10
+date: 2025-12-12
 format: 
     beamer:
         theme: metropolis

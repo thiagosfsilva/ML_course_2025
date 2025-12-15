@@ -211,11 +211,12 @@ Workflow de uma análise estatística 'tradicional':
 
 ::: {.incremental}
 
-1. Preparação dos dados
-2. Análise descritiva
-3. Visualização de dados
-4. Ajuste do modelo (teste estatístico)
-5. Interpretação dos resultados
+1. Escolha do modelo 
+2. Preparação dos dados
+3. Análise descritiva
+4. Visualização de dados
+5. Ajuste do modelo (teste estatístico)
+6. Interpretação dos resultados
 
 :::
 
@@ -229,8 +230,8 @@ Workflow de uma análise preditiva:
 2. Análise descritiva
 3. Visualização de dados
 4. **Divisão dos dados em *treinamento* e *teste* **
-5. Ajuste do modelo 
-7. **Otimização e validação do modelo** 
+5. Escolha do modelo 
+7. **Otimização do modelo por validação** 
 8. **Teste do modelo**
 
 :::
