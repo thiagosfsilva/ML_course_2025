@@ -1,7 +1,7 @@
 ---
 title: "Aula 4 - Machine Learning"
 subtitle: 'Introdução ao aprendizado de máquina - UEMA 2025'
-author: 'Thiago S. F .Silva'
+author: 'Thiago S. F. Silva'
 date: 2025-12-15
 format: 
     beamer:
@@ -74,6 +74,8 @@ No caso específico de visão computacional:
 
 ![](../figs/segvsclasvsdecjpg.jpg)
 
+# Parte II - Aplicando Machine Learning
+
 ## Machine learning no R
 
 - O pacote [`tidymodels`](https://www.tidymodels.org/)
@@ -124,7 +126,7 @@ Desvantagens:
 
 Algoritmos de ML podem aprender "bem demais". Isso é chamado de *overfitting* (ajuste excessivo). Normalmente detectado por uma acurácia alta durante a otimização, e baixa durante o teste.
 
-![](../figs/Overfitting.jpg){width=50%, fig-align="center"}
+![](../figs/Overfitting.jpg){width=50% fig-align="center"}
 
 ## Dados desbalanceados
 
@@ -162,13 +164,32 @@ Como 'medir' essa separação?
 
 ## Classificando o dataset *iris*
 
-**Exemplo:** Índice de Pureza de Gini
+**Exemplos (C = número de classes):**
 
-$ Gini = 1 - \sum_{i=1}^{C}{p_i * (1-p_1)}$
+\small
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Índice de Pureza de Gini**
+
+$Gini = 1 - \sum_{i=1}^{C}{p_i * (1-p_i)}$
 
 - Máximo de Pureza: 0
-- Mínimo: 0.5 (duas classes)
-- 0.6667 (três classes), etc.
+- Mínimo: $(C-1)/C$
+:::
+
+::: {.column width="50%"}
+**Índice de Entropia de Shannon**
+
+$Entropia = - \sum_{i=1}^{C}{p_i * log(p_i)}$
+
+- Mínimo de Entropia: 0
+- Máximo: $log(C)$
+:::
+
+::::
 
 ## Classificando o dataset *iris*
 
@@ -424,4 +445,276 @@ acuracia <- sum(diag(conf_mat)) / sum(conf_mat)
 erro <- 1-acuracia
 
 ```
+# Parte III - Conceitos Adicionais
 
+## `set.seed()` ?
+
+O comando `set.seed()` fica a 'semente'do gerador de numeros aleatorios.
+
+- É muito dificuil criar um mecanismo computacional para gerar numeros realmente aleatórios
+- Computadores usam algortimos que geram números pseudo-aleatórios
+- A partir de um valor inicial, aplicam uma série de cálculos instáveis, que resultam em numeros completamente diferentes mesmo se a semente é bem similar.
+- Sem uma especificação de semente, o computador usa o horário.
+
+## `set.seed()` ?
+
+```{r setseed, echo=TRUE}
+set.seed(42)
+runif(5,0,1)
+
+set.seed(43)
+runif(5,0,1)
+```
+
+## `set.seed()` ?
+
+Especificar o `set.seed()` garante a reprodutibilidade dos resultados.
+
+
+## Engenharia de feições
+
+\small
+
+Pré-processamento das feições para melhorar a performance do modelo.
+
+- Normalização/Padronização: equaliza a escala entre as feições contínuas. 
+
+- Transformações não-lineares: logaritmos, raízes, potências.
+
+- Combinações de variáveis: multiplicações, razões. Ex. NDVI.
+
+- Desmembramento de variáveis: separa informações complexas, como decompor datas em dia, mês, ano, semestre, trimestre, etc.
+
+- *One-Hot Encoding*: converter variáveis categóricas em variáveis *dummy* numéricas.
+
+- *Label Encoding*: substuir categorias por números inteiros (menos impprtante no R).
+
+- Imputação: preenchimento de valores vazios usando alguma regra.
+
+## Otimizando o modelo - validação cruzada
+
+- Sempre queremos testar o modelo com dados 'novos'.
+
+- A separação entre treino e teste já sacrifica parte dos dados.
+
+- Se precisarmos separar a amostra de treino de novo entre treino e validação, perdemos ainda mais.
+
+## Otimizando o modelo - validação cruzada
+
+*k- (ou v-) fold cross validation*: separação dos dados de treino em 'blocos' (*folds*). 
+
+Ex: 5-fold cross-validation
+
+1. Divida os dados de treino aleatoriamente em 5 blocos iguais.
+2. Junte quatro dos blocos em uma tablela e ajuste o modelo.
+3. Use o quinto bloco para validar o modelo, calculando uma métrica de erro.
+4. Repita mais 4 vezes, cada vez deixando um bloco de fora.
+5. Faça a média dos 5 erros calculados.
+
+Vantagens: 
+
+- Todos os dados de treino são usados para treino e para validação.
+- A cada combinação de hiperparametros testada, você estima um erro **médio**. 
+## Otimizando o modelo - validação cruzada
+
+![https://scikit-learn.org/stable/modules/cross_validation.html](../figs/cross_validation.png){width=80% fig-align='center'}
+## Alternativa: *jacknife* ou *LOOCV*
+
+**Leave-One-Out Cross Validation (LOOCV):**também conhecido como *jacknife*. Assumindo que você tem $N% observações, o procedimento é:
+
+1) Retire a observação $n=1$ da tabela.
+2) Ajuste o modelo com as observações restantes.
+3) Faça a predição da obs que ficou fora e calcule o erro.
+4) Repita para $n = {2,...,N}$.
+5) Faça a média dos $N$ erros.
+
+Útil quando o dataset é pequeno, mas custoso computacionalmente se o dataset é grande. 
+
+## Métricas de Erro/Acurácia
+
+- Quantificar o erro de predição é um dos aspectos essencias do processo de ML. 
+
+- Como se o modelo fosse uma prova, e a métrica fosse a nota da prova. 
+
+- Quando melhor a nota, maior o aprendizado (em teoria)
+
+## Métricas de Erro/Acurácia
+
+Existem dezenas de métricas de erro, vamos focar apenas em algumas. Também são chamadas de *loss functions* ou *scoring functions*.
+
+- Acurácia Simples
+- Índice Kappa
+- AUC/ROC
+- Precision/Recall/F1 score
+- RMSE e MAE
+
+## A matriz de confusão
+
+Todas as métricas de classificação são de alguma maneira relacionadas à matriz de confusão:
+
+![](../figs/conf_mat.png){fig-align="center"}
+
+
+## A matriz de confusão
+
+Para um problema multi-classe, temos que considerar cada classe:
+
+|              | **Classe A** | Classe B | Classe C | Classe D |
+|--------------|----------|--------------|----------|----------|
+| **Classe A** | _TP_     | _FN_         | _FN_     | _FN_     |
+| Classe B     | TN       | TN           | TN       | TN       |
+| Classe C     | TN       | TN           | TN       | TN       |
+| Classe D     | TN       | TN           | TN       | TN       |
+
+## A matriz de confusão
+
+Para um problema multi-classe, temos que considerar cada classe:
+
+|              | Classe A | **Classe B** | Classe C | Classe D |
+|--------------|----------|--------------|----------|----------|
+| Classe A     | TN       | TN           | TN       | TN       |
+| **Classe B** | _FN_     | _TP_         | _FN_     | _FN_     |
+| Classe C     | TN       | TN           | TN       | TN       |
+| Classe D     | TN       | TN           | TN       | TN       |
+
+## A matriz de confusão
+
+Dependendo da métrica, podemos generalizar para:
+
+|              | Classe A | Classe B     | Classe C | Classe D |
+|--------------|----------|--------------|----------|----------|
+| Classe A     | Correto  | Errado       | Errado   | Errado   |
+| Classe B     | Errado   | Correto      | Errado   | Errado   |
+| Classe C     | Errado   | Errado       | Correto  | Errado   |
+| Classe D     | Errado   | Errado       | Errado   | Correto  |
+
+## Acurácia Simples ou Global
+
+Simplesmente a proporção de acertos (ou erros):
+
+
+$Acuracia = \frac{TP+TN}{TP+TN+FP+FN}$
+
+
+## Acurácia Simples ou Global
+
+|              | Classe A | Classe B     |
+|--------------|----------|--------------|
+| Classe A     | 26       | 3            |
+| Classe B     | 6        | 30           |
+
+- Ac. Global = (26 + 30)/(26+3+6+30) = `r round((26 + 30) / (26+3+6+30),3)`
+- Ac. Classe A = 26/(26+3) = `r round(26/(26+3),3)`
+- Ac. Classe B = 30/(30+6) = `r round(30/(30+6),3)`
+
+## Índice Kappa
+
+Muito usado em sensoriamento remoto, é uma modificação da acurácia que 'desconta' a probabilidade de você acertar por acaso.
+
+$\kappa =\frac {2\times (TP\times TN-FN\times FP)}{(TP+FP)\times (FP+TN)+(TP+FN)\times (FN+TN)}$
+
+## Índice Kappa
+
+|              | Classe A | Classe B     |
+|--------------|----------|--------------|
+| Classe A     | 26       | 3            |
+| Classe B     | 6        | 30           |
+
+```{r}
+library(yardstick)
+mat <- matrix(nrow = 2, ncol = 2, data = c(26,6,3,30), byrow = T)
+k <- round(kap(mat)$.estimate,3)
+```
+Acurácia Global = `r round((26 + 30) / (26+3+6+30),3)`
+Kappa = `r k`.
+
+## ROC/AUC
+
+*ROC* significa *Receiver Operator Curve*: representação visual da performance do modelo. 
+
+*AUC* significa *Area Under the Curve*: área abaixo da curva ROC.
+
+## ROC/AUC
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](../figs/auc_0-5.png)
+![](../figs/auc_0-65.png)
+
+:::
+
+::: {.column width="50%"}
+
+![](../figs/auc_0-93.png)
+![](../figs/auc_1-0.png)
+:::
+
+::::
+
+## Precision, Recall, Sensitivity, Specificty, F1 Score
+
+Métricas mais apropriadas para o *TESTE* do modelo, pois podem ser interpretadas mais sutilmente. Relembrando: 
+
+![](../figs/conf_mat.png){fig-align="center"}
+
+## Precision, Recall, Sensitivity, Specificty, F1 Score
+
+**Precision (TP/TP+FP):** porcentagem de positivos corretos dentre todos os positivos *detectados*. Em SR, a *'acurácia do produtor'*. Maior precisão =  menor chance de falsos positivos.
+
+|              | Classe A | Classe B     |
+|--------------|----------|--------------|
+| Classe A     | 26       | 3            |
+| Classe B     | 6        | 30           |
+
+- Precisão Classe A = 26/(26+6) = `r round(26/(26+3),3)`
+- Precisão Classe B = 30/(30+3) = `r round(30/(30+6),3)`
+
+## Precision, Recall, F1 Score
+
+**Recall (TP/TP+FN):** porcentagem de positivos verdadeiros que foram efetivamente identificados. O mesmo que acurácia por classe ou *'acurácia do usuário*. Maior recall = maior chance de detecção de positivos.
+
+|              | Classe A | Classe B     |
+|--------------|----------|--------------|
+| Classe A     | 26       | 3            |
+| Classe B     | 6        | 30           |
+
+- Precisão Classe A = 26/(26+3) = `r round(26/(26+3),3)`
+- Precisão Classe B = 30/(30+6) = `r round(30/(30+6),3)`
+
+## Exemplos de aplicação
+
+Caso 1: Deteção de Spam - é melhor deixar um e-mail de Spam cair no seu inbox do que jogar um e-mail real na caixa de Spam.
+
+- A Precisão foca em minimizar Falsos Positivos (FP). Maior precisão significa menos emails de SPAM são marcados como reais, à custa de marcar algus emails reais como spam.
+
+
+## Exemplos de aplicação
+
+Caso 2: Diagnostico de uma doença - é melhor diagnosticar um paciente sadio como doente do que deixar de diagnosticar um paciente doente.
+
+- O Recall foca em minimizar Falsos Negativos. Maior recall significa que mais pacientes doentes são diagnosticados, à custa de diagnosticar alguns sadios.
+
+
+## Precision, Recall, F1 Score
+
+Exemplo interativo:
+
+[https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall)
+
+## F1 Score
+
+F1 Score: uma métrica única que combina Precision e Recall:
+
+$F1=\dfrac{2 \times Precision \times Recall}{Precision + Recall}$
+
+Essa formula prioriza valores balanceados das duas métricas.
+
+## Erros contínuos
+
+Para problemas de *regressão*, os erros são mais simples: quão perto/longe você chegou do valor real?
+
+- Root Mean Squared Error (RMSE): $\sqrt{\dfrac{\sum_{i=1}^{N}(pred_i-obs_i)^2}{N}}$
+
+- Mean Absolute Error (MAE): $\dfrac{\sum_{i=1}^{N}\left|\left(pred_i-obs_i\right)\right |}{N}$

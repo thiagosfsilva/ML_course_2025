@@ -1,6 +1,6 @@
 ---
 title: "Curso Machine Learning UEMA 2025"
-author: "Thiago Sanna F. Silva"
+author: "Thiago S. F. Silva"
 format: html
 ---
 
@@ -20,9 +20,9 @@ format: html
 
 [Slides Aula 3](slides/aula_3.pdf)
 
-### Aula 4 - Introdução ao Machine Learning (15/12/2025)
+### Aula 4 - Introdução ao Machine Learning (15 e 16/12/2025)
 
-[Slides Aula 3](slides/aula_4.pdf)
+[Slides Aula 4](slides/aula_4.pdf)
 
 ### Datasets e scripts criados durante o curso 
 
@@ -33,5 +33,5 @@ format: html
 |[Plot Florestal (xlsx)](data/plot_florestal.xlsx) | [`3_explorando_ggplot2.R`](demos/3_explorando_ggplot2.R) |
 |[Turbidez (csv)](data/turbidez.csv)               | [`4_preprocessamento_turbidez.R`](demos/4_preprocessamento_turbidez.R) |
 |[Voos (parquet)](data/flights-1m.parquet)         | [`5_exemplo_RF.R`](demos/5_exemplo_RF.R`) |
-|[Macrófitas (csv)](data/rich_env_jun.csv) | |
+|[Macrófitas (csv)](data/rich_env_jun.csv) |       | [ 6_explorando_tidymodels.R](6_explorando_tidymodels.R)
 
