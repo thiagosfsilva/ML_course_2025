@@ -1,0 +1,70 @@
+---
+title: "Aula 4 - Machine Learning"
+subtitle: 'Introdução ao aprendizado de máquina - UEMA 2025'
+author: 'Thiago S. F. Silva'
+date: 2025-12-15
+format:
+  beamer:
+    theme: metropolis
+    urlcolor: blue
+    include-in-header:
+      file: custom.tex
+---
+
+# Parte I - Introdução e Terminologia
+
+## O que é SR?
+
+## Estrutura de uma imagem de SR
+
+- Bandas
+- Pixels
+- DN
+
+## Exemplo - Imagem Sentinel 2
+
+## Dados vetoriais
+
+O famoso 'shapefile'.
+
+ADD IMAGE
+
+## Dados vetoriais
+
+- Vértices
+- Tabela de Atributos
+
+- Pontos
+- Linhas
+- Polígonos
+
+## Casos problemáticos
+
+- Polígomo Multiparte
+- Polígono 'Donut'
+
+## Pacotes para geoprocessamento R
+
+A nova geração:
+- terra
+- sf
+- rstac
+
+Old school:
+- raster
+- sp
+- maptools?
+
+## Visualizando dados geoespaciais
+
+- Mapview
+- tmap
+- ggmap
+
+
+
+
+
+
+
+
