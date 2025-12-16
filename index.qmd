@@ -33,5 +33,5 @@ format: html
 |[Plot Florestal (xlsx)](data/plot_florestal.xlsx) | [`3_explorando_ggplot2.R`](demos/3_explorando_ggplot2.R) |
 |[Turbidez (csv)](data/turbidez.csv)               | [`4_preprocessamento_turbidez.R`](demos/4_preprocessamento_turbidez.R) |
 |[Voos (parquet)](data/flights-1m.parquet)         | [`5_exemplo_RF.R`](demos/5_exemplo_RF.R) |
-|[Macrófitas (csv)](data/rich_env_jun.csv) |       | [`6_explorando_tidymodels.R`](demos/6_explorando_tidymodels.R)
+|[Macrófitas (csv)](data/rich_env_jun.csv)         | [`6_modelando_tidymodels.R`](demos/6_modelando_tidymodels.R) |
 
