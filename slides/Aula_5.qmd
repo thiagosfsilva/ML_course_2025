@@ -83,6 +83,8 @@ O famoso 'shapefile' (geopackage é um formato muito melhor).
 
 ## Pacotes para geoprocessamento R
 
+[https://r-spatial.org/](https://r-spatial.org/)
+
 A nova geração:
 
 - `terra` ([link](https://rspatial.github.io/terra/)):para rasters (mas também trabalha com vetores)
@@ -93,7 +95,15 @@ Old school:
 - `raster` ([link](https://github.com/rspatial/raster)): adivinhem pra que?
 - `sp`([link](https://github.com/edzer/sp/)): para vetores (mas também suporta rasters)
 
-## Visualizando dados geoespaciais
+## Adicionais
+
+Utilidades:
+
+- `RSToolbox`: [https://bleutner.github.io/RStoolbox/](https://bleutner.github.io/RStoolbox/)
+
+- `rsi`: [https://docs.ropensci.org/rsi/index.html](https://docs.ropensci.org/rsi/index.html)
+
+Visualização:
 
 - `mapview`: [https://r-spatial.github.io/mapview/](https://r-spatial.github.io/mapview/)
 - `tmap`: [https://r-tmap.github.io/tmap/](https://r-tmap.github.io/tmap/)
@@ -109,7 +119,7 @@ Muito do sensoriamento remoto moderno envolve operações na nuvem ou em contato
 
 [STAC catalogs](https://stacspec.org/en/): [`rstac`](https://github.com/brazil-data-cube/rstac)
 
-Menção honrosa: [`rsi`](https://docs.ropensci.org/rsi/index.html)
+
 
 ## Usando o `rstac` para acesar e baixar dados
 
@@ -134,16 +144,29 @@ Esse último parece familiar...
 
 ## Classificação de imagens usando `tidymodels`
 
-O único passo adicional é transformar a imagem e as amostras em uma tabela:
+O único passo adicional é transformar as amostras em uma tabela:
 
 | Pixel | Banda 1 | Banda 2 | Banda 3 | Classe |
 |-------|---------|---------|---------|--------|
-| 1     | 45      | 56      | 35      | NA     |
-| 2     | 67      | 45      | 23      | NA     |
+| 1     | 45      | 56      | 35      | Agua   |
+| 2     | 67      | 45      | 23      | Agua   |
 | 3     | 123     | 112     | 215     | Solo   |
 | 4     | 240     | 242     | 250     | Urbano |
 | 5     | 12      | 16      | 8       | Agua   |
-| 6     | 67      | 32      | 56      | NA     |
+| 6     | 67      | 32      | 56      | Solo   |
+
+## Classificação de imagens usando `tidymodels`
+
+E depois usar o modelo pra gerar uma predicao para todo o raster:
+
+| Pixel | Banda 1 | Banda 2 | Banda 3 | Pred   |
+|-------|---------|---------|---------|--------|
+| 1     | 45      | 56      | 35      | Agua   |
+| 2     | 67      | 45      | 23      | Agua   |
+| 3     | 123     | 112     | 215     | Solo   |
+| 4     | 240     | 242     | 250     | Urbano |
+| 5     | 12      | 16      | 8       | Agua   |
+| 6     | 67      | 32      | 56      | Solo   |
 
 
 ## Mais um algoritmo de ML: *Support Vector Machines*
