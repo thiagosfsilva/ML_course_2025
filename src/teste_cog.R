@@ -11,8 +11,6 @@ aoi_bbox <- c(xmin = -43.272,ymin = -2.510,xmax = -43.148,ymax = -2.440)
 
 # Convert to sf object (WGS84)
 aoi_sf <- st_as_sfc(st_bbox(aoi_bbox, crs = 4326))
-st_write(aoi_sf,'data/aoi.gpkg')
-
 
 mapview(aoi_sf)
 
@@ -29,14 +27,14 @@ cbers_links <- cbers_mux %>% assets_url()
 
 # Lendo direto da web pra memória
 for(img in c(1:length(cbers_links))){
-    nome <- cat(unlist(strsplit(cbers_links[1],"_"))[4:5],sep="_")
+    nome <- cat(unlist(strsplit(cbers_links[img],"_"))[4:5],sep="_")
     print(nome)
     print('started connection')
     rs <- rast(cbers_links[img])
     print('started_processing')
     aoi_rep <- st_transform(aoi_sf, crs = crs(rs))
     cp <- crop(rs,aoi_rep)
-    writeRaster(cp,paste0('data/large/',nome))
+    writeRaster(cp,paste0('data/large/',nome),overwrite=T)
     'End'
 }
 
