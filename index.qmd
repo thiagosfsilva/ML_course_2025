@@ -40,4 +40,6 @@ format: html
 |[Turbidez (csv)](data/turbidez.csv)               | [`4_preprocessamento_turbidez.R`](demos/4_preprocessamento_turbidez.R) |
 |[Voos (parquet)](data/flights-1m.parquet)         | [`5_exemplo_RF.R`](demos/5_exemplo_RF.R) |
 |[Macrófitas (csv)](data/rich_env_jun.csv)         | [`6_modelando_tidymodels.R`](demos/6_modelando_tidymodels.R) |
+|[imagem_composta_CBERS](data/imagem_composta_CBERS.tif) | |
+|[amostras_treinamento](data/amostras.gpkg) ||
 

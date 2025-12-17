@@ -26,15 +26,56 @@ cbers_links <- cbers_mux %>% assets_url()
 # longmin, longmax, latmin,latmax
 
 # Lendo direto da web pra memória
-for(img in c(1:length(cbers_links))){
-    nome <- cat(unlist(strsplit(cbers_links[img],"_"))[4:5],sep="_")
+for(img in c(11:length(cbers_links))){
+    nome <- paste(unlist(strsplit(cbers_links[img],"_"))[4:5],collapse="_")
+    print(img)
     print(nome)
-    print('started connection')
+    start <- Sys.time()
+    print(paste('started connection at', start))
     rs <- rast(cbers_links[img])
+    print(paste('Connection time:', round(Sys.time()-start,2),'s'))
     print('started_processing')
+    start <- Sys.time()
+    print(paste('started processing at', start))
     aoi_rep <- st_transform(aoi_sf, crs = crs(rs))
     cp <- crop(rs,aoi_rep)
+    print(paste('Processing time:', round(Sys.time()-start,2),'s'))
+    print('Saving...')
     writeRaster(cp,paste0('data/large/',nome),overwrite=T)
-    'End'
+    print('End')
 }
 
+r1 <- rast(c('data/large/20241101_BAND5.tif',
+           'data/large/20241101_BAND6.tif',
+           'data/large/20241101_BAND7.tif',
+           'data/large/20241101_BAND8.tif',
+           'data/large/20241101_NDVI.tif',
+           'data/large/20241101_EVI.tif'))
+
+r2<-  rast(c('data/large/20250101_BAND5.tif',
+             'data/large/20250101_BAND6.tif',
+             'data/large/20250101_BAND7.tif',
+             'data/large/20250101_BAND8.tif',
+             'data/large/20250101_NDVI.tif',
+             'data/large/20250101_EVI.tif'))
+
+r3<-  rast(c('data/large/20250301_BAND5.tif',
+             'data/large/20250301_BAND6.tif',
+             'data/large/20250301_BAND7.tif',
+             'data/large/20250301_BAND8.tif',
+             'data/large/20250301_NDVI.tif',
+             'data/large/20250301_EVI.tif'))
+
+r4<-  rast(c('data/large/20250101_BAND5.tif',
+             'data/large/20250501_BAND6.tif',
+             'data/large/20250501_BAND7.tif',
+             'data/large/20250501_BAND8.tif',
+             'data/large/20250501_NDVI.tif',
+             'data/large/20250501_EVI.tif'))
+
+
+library(ggspatial)
+library(ggplot2)
+ggplot() + layer_spatial(r2[[c(2,4,3)]])
+
+writeRaster(r2,'data/large/imagem_composta_CBERS.tif')
