@@ -1,8 +1,9 @@
 ---
-title: "Aula 4 - Geoprocessamento e Machine Learning"
+title: "Aula 5 - Geoprocessamento e ML"
 subtitle: 'Introdução ao aprendizado de máquina - UEMA 2025'
 author: 'Thiago S. F. Silva'
 date: 2025-12-17
+prefer-html: true
 format:
   beamer:
     theme: metropolis
@@ -13,58 +14,240 @@ format:
 
 # Parte I - Introdução e Terminologia
 
-## O que é SR?
+## Sensoriamento Remoto
+
+O que é sensoriamento remoto?
+
+. . .
+
+- Uma *medida* da quantidade de REM refletida pela superfície.
+- Essa medida é organizada na forma de uma *imagem*.
+
+Geoprocessamento: SR + SIG + GNSS
 
 ## Estrutura de uma imagem de SR
 
-- Bandas
-- Pixels
-- DN
+- Formato **raster**: bandas, pixels, ND (ou DN)
 
-## Exemplo - Imagem Sentinel 2
+![](../figs/image-struc.png)
 
 ## Dados vetoriais
 
-O famoso 'shapefile'.
+O famoso 'shapefile' (geopackage é um formato muito melhor).
 
-ADD IMAGE
+![](../figs/pnt_line_poly.png){width=50% fig-align="center"}
+
+\tiny National Ecological Observatory Network (NEON)
+
 
 ## Dados vetoriais
 
-- Vértices
-- Tabela de Atributos
+- Cada geometria de objeto é conectada a uma *tabela de atributos*.
+- Uma tabela de atributos é uma tabela...e já sabemos fazer muita coisa com tabelas! 
 
-- Pontos
-- Linhas
-- Polígonos
 
 ## Casos problemáticos
 
-- Polígomo Multiparte
-- Polígono 'Donut'
+- Polígono Multiparte
+
+![](../figs/example_multipart.png){fig-align="center"}
+
+\tiny https://grass.osgeo.org/grass-stable/manuals/addons/v.multi2singlepart.html
+
+## Casos problemáticos
+
+- Polígono em anel (ou 'donut')
+
+![](../figs/Ring_Polygon3.jpg){fig-align="center"}
+
+\tiny https://esri.github.io/geometry-api-java/doc/Polygon.html
+
+## Dados geoespaciais - sistema de coordenadas
+
+- O que torna um dado espacial: *georeferenciamento*.
+- Exige um **Sistema de Coordenadas de Referência** (Coordinate Reference System, CRS)
+- A famosa "projecão"...
+
+. . .
+
+- Um CRS inclui:
+  - Datum
+  - Projeção
+  - Sistema de Coordenadas
+  - Origem
+
+## O grande poster explicativo
+
+- Preparado para minha disciplina de GIS
+- [Disponível na página do curso](https://thiagosfsilva.github.io/ML_course_2025/)
 
 ## Pacotes para geoprocessamento R
 
 A nova geração:
-- terra
-- sf
-- rstac
+
+- `terra` ([link](https://rspatial.github.io/terra/)):para rasters (mas também trabalha com vetores)
+- `sf` ([link](https://r-spatial.github.io/sf/index.html)): para vetores
 
 Old school:
-- raster
-- sp
-- maptools?
+
+- `raster` ([link](https://github.com/rspatial/raster)): adivinhem pra que?
+- `sp`([link](https://github.com/edzer/sp/)): para vetores (mas também suporta rasters)
 
 ## Visualizando dados geoespaciais
 
-- Mapview
-- tmap
-- ggmap
+- `mapview`: [https://r-spatial.github.io/mapview/](https://r-spatial.github.io/mapview/)
+- `tmap`: [https://r-tmap.github.io/tmap/](https://r-tmap.github.io/tmap/)
+- `ggmap`: [https://paleolimbot.github.io/ggspatial/](https://paleolimbot.github.io/ggspatial/)
+
+## Interface com a nuvem
+
+Muito do sensoriamento remoto moderno envolve operações na nuvem ou em contato com a nuvem. Exemplos:
+
+[Google Earth Engine](https://earthengine.google.com):  [`rgee`](https://github.com/r-spatial/rgee)[^1]
+
+[^1]: usa o python por trás das cortinas.
+
+[STAC catalogs](https://stacspec.org/en/): [`rstac`](https://github.com/brazil-data-cube/rstac)
+
+Menção honrosa: [`rsi`](https://docs.ropensci.org/rsi/index.html)
+
+## Usando o `rstac` para acesar e baixar dados
+
+Exemplo: [Brazil Data Cube](https://data.inpe.br/bdc/)
+
+[Coleção CBERS4-MUX-2M-1](https://brazil-data-cube.github.io/products/cube-collections/CBERS4-MUX-2M-1.html): imagens compostas do sensor CBERS-4 MUX (20m) para períodos bimensais, usando o algoritmo CFMASK.
 
 
+# Parte II - Exemplos em R
+
+# Parte III -  ML para classificação de imagens
+
+## Tipos de classificação
+
+Existem dois grandes paradigmas de classificação de imagem (que também se aplicam ao machine learning):
+
+- **Não-Supervisionada (*Unsupervised*):** o algoritmo tenta 'adivinhar' quem são as classes, e o usuário  nomeia as classes *após* a classificação. Em ML e estatística é conhecido normalmente como *clustering*.
+
+- **Supervisionada (*Supervised*):** o usuário define as classes *antes* da classificação, seleciona amostras que representam cada classe, e *treina* o algoritmo a reconhecer as classes.
+
+Esse último parece familiar...
+
+## Classificação de imagens usando `tidymodels`
+
+O único passo adicional é transformar a imagem e as amostras em uma tabela:
+
+| Pixel | Banda 1 | Banda 2 | Banda 3 | Classe |
+|-------|---------|---------|---------|--------|
+| 1     | 45      | 56      | 35      | NA     |
+| 2     | 67      | 45      | 23      | NA     |
+| 3     | 123     | 112     | 215     | Solo   |
+| 4     | 240     | 242     | 250     | Urbano |
+| 5     | 12      | 16      | 8       | Agua   |
+| 6     | 67      | 32      | 56      | NA     |
 
 
+## Mais um algoritmo de ML: *Support Vector Machines*
+
+Algoritmo popular para classificação de imagens de sensoriamento remoto
+
+- Desenvolvido na década de 90 n AT&T Bell Labs por [Vladmir Vapnik](https://en.wikipedia.org/wiki/Vladimir_Vapnik)
+- Ideias originais desenvolvidas na Rússia na décadas de 60-70
+
+## Mais um algoritmo de ML: *Support Vector Machines*
+
+Vantagens:
+
+- Classificação e regressão
+- Problemas Lineares e nào lineares com o 'truqe do kernel'
+- Eficiente em espaços multidimensionais in high dimensional spaces.
+- Eficiente também quando o numero de variaveis é maior que o de amostras.
+- Usa apenas um subconjunto das amostras de treino na solução, então eficiente em memória
+
+## *Support Vector Machines* (SVM)
+
+Princípio: o SVM tenta encontrar o melhor limiar de separação entre as classes.
+
+- Para duas variáveis: uma linha
+- Para três variáveis: um plano
+- Para 4 ou mais variáveis: um *hiperplano*
+
+## *Support Vector Machines* (SVM)
+
+![](../figs/svg_1.jpg){width=80%}
+
+\tiny By User:ZackWeinberg, based on PNG version by User:Cyc - This file was derived from: Svm separating hyperplanes.png, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=22877598 
+
+## *Support Vector Machines* (SVM)
 
 
+Para identificar o hiperplano, o SVM foca apenas nos casos limítrofes. Essas amostras são os *vetores de suporte*.
+
+![](../figs/svg_2.jpg){width=60%}
+
+\tiny By Larhmam - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=73710028 
+
+## Exemplo interativo
+
+[https://greitemann.dev/svm-demo](https://greitemann.dev/svm-demo)
+
+## *Support Vector Machines* (SVM)
+
+Mas e se o problema não é linear?
+
+![](../figs/kernel_trick_0.png){width=60%}
+
+\tiny https://gregorygundersen.com/blog/2019/12/10/kernel-trick/ 
+
+## *Support Vector Machines* (SVM)
+
+Podemos aplicar transformações matemáticas que separem os dados em outras dimensões.
+
+.  . .
+
+![](../figs/kernel_trick.png){width=80%}
+
+\tiny https://gregorygundersen.com/blog/2019/12/10/kernel-trick/ 
 
 
+## *Support Vector Machines* (SVM)
+
+O *truque do kernel (kernel trick)* é um método matemático que permite ao SVM 'adivinhar' qual a melhor transformação para maximizar a separação dos dados. Diferentes funções de kernel podem ser utilizadas:
+
+- **Linear:** apenas linhas/planos/hiperplanos.
+-**Polinomial**: permite curvas suaves.
+- **Radial Basis Functions (RBF) / Gaussiano**: o mais comum, pois é extremamente flexível em se adaptar aos dados.
+
+Existem outros, mas na prática o RBF é o mais usado.
+
+[https://greitemann.dev/svm-demo](https://greitemann.dev/svm-demo)
+
+## Parâmetros do SVM
+
+São aprendidos pelo modelo.
+
+- Os vetores de suporte
+- Os seus pesos (weights)
+- O intercepto (viés)
+
+## Hiperparâmetros do SVM
+
+Precisam ser otimizados.
+
+- Kernel: linear, quadrático, etc.
+- Custo (cost): controla a amplitude da *margem*.
+
+![](../figs/svm_cost_margin.png)
+
+\tiny https://stackabuse.com/understanding-svm-hyperparameters/ 
+
+## Hiperparâmetros do SVM
+
+Precisam ser otimizados.
+
+- Kernel: linear, quadrático, etc.
+- Custo (cost): controla a amplitude da *margem*.
+- Regularização ($\gamma$ ou $\sigma$): controla o 'detalhamento' das bordas de separação.
+
+![](../figs/svm_gamma.png)
+
+\tiny https://stackabuse.com/understanding-svm-hyperparameters/ 

@@ -24,6 +24,12 @@ format: html
 
 [Slides Aula 4](slides/aula_4.pdf)
 
+### Aula 5 - Geprocessamento e machine learning
+
+[Slides Aula 5](slides/aula_5.pdf)
+
+[Poster explicativo CRS](figs/CRS_poster.png)
+
 ### Datasets e scripts criados durante o curso 
 
 | Datasets | Scripts |
