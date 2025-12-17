@@ -3,7 +3,7 @@
 #### 17/12/2025
 
 # Se precisar instalar
-install.packages("terra","sf","dplyr","RStoolbox")
+# install.packages("terra","sf","dplyr","RStoolbox")
 
 # Pacotes necessários
 library(terra)
@@ -58,22 +58,37 @@ names(landsat) <- c('Azul','Verde',
 names(landsat)
 
 # Operacoes com bandas
+ndvi <- (landsat$IVP-landsat$Vermelho)/(landsat$IVP+landsat$Vermelho)
+plot(ndvi)
+
+# Operacoes com escalares
+ndvi_prc <- ndvi*100
+plot(ndvi_prc)
 
 ### Vetor
 
-# Carregando um aquivo vetorial
+# Carregando um aquivo vetorial com o pacote sf
+vetor <- st_read('data/large/exemplo_vetor.gpkg')
 
 # Inspecionando arquivo vetorial
+vetor
+head(vetor)
+summary(vetor)
 
 # Visualisando o conteudo do arquivo no mapa
+plot(vetor)
+mapview(vetor)
 
-# Visualizando a tabela de atributs
+# Combinando layers
+mapview(landsat) + mapview(vetor)
 
 # Operacoes com atributos
-#
+floresta <- vetor %>%
+    filter(class == 'forest')
 
-### Raster para tabela:
+# Se precisar transformar em dataframe sem geometria
+# use %>% st_drop_geometry() no final do pipe
 
-# Extraindo valores
+mapview(landsat) + mapview(floresta)
 
 

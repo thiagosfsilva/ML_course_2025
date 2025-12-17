@@ -103,6 +103,8 @@ Utilidades:
 
 - `rsi`: [https://docs.ropensci.org/rsi/index.html](https://docs.ropensci.org/rsi/index.html)
 
+- `tidyterra`:[https://dieghernan.github.io/tidyterra/index.html](https://dieghernan.github.io/tidyterra/index.html)
+
 Visualização:
 
 - `mapview`: [https://r-spatial.github.io/mapview/](https://r-spatial.github.io/mapview/)
