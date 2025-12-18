@@ -1,0 +1,61 @@
+---
+title: "Exercicio Prático - Introdução ao Machine Learning"
+author: "UEMA 2025"
+format: pdf
+---
+
+## Objetivos
+
+- Praticar os conceitos aprendidos durante o curso de maneira independente.
+
+## Exercício
+
+Este exercício pode ser feito individualmente ou em grupos de até três pessoas. O exercício consiste dos seguintes passos:
+
+1) Identificar um conjunto de dados e formular um problema de *machine learning*:
+
+    - **Exemplo 1:** Uma imagem ou conjunto de imagens de satélite e amostras de treinamento para classificação.
+    
+    - **Exemplo 2:** Uma imagem ou conjunto de imagens de satélite e amostras coletadas em campo que possam ser extrapoladas a partir dos dados de SR - ocorrência de espécies, biomassa, altura, densidade, etc.
+    
+    - **Exemplo 3:** Um conjunto de dados tabulares onde o objetivo é obter um modelo preditivo (classificação ou regressão).
+    
+2) Executar e reportar a análise de acordo com os passos aprendidos no curso, relatando ao final, em forma de apresentação simples:
+    - Os dados de entrada.
+    - A natureza e justificativa do problema.
+    - O pré-processamnto dos dados.
+    - A escolha do(s) algoritmo(s) de machine learning.
+    - A construção do modelo (engenharia de feições, estratégia de otimização).
+    - Os resultados finais do teste do modelo
+    - Se relevante, a predição final do modelo para todo o conjunto de dados.
+    - Problemas e dificuldades encontrados, e dúvidas durante o processo.
+
+As apresentações se iniciarão sexta 19/12 às 9:00am, no Laboratório de Geoprocessamento.
+
+## Possíveis fontes de dados
+
+Coleções STAC:
+
+- Brazilian data cube: [https://data.inpe.br/bdc/en/stac-spatiotemporal-asset-catalog-2/](https://data.inpe.br/bdc/en/stac-spatiotemporal-asset-catalog-2/)
+
+- Microsoft Planetary Computer:
+
+    - Lista das coleções: [https://planetarycomputer.microsoft.com/catalog](https://planetarycomputer.microsoft.com/catalog)
+
+    - Link STAC: [https://planetarycomputer.microsoft.com/docs/quickstarts/reading-stac/](https://planetarycomputer.microsoft.com/docs/quickstarts/reading-stac/)
+
+- Element48: [https://element84.com/earth-search](https://element84.com/earth-search)
+
+Download manual de imagens de satélite:
+  
+- Brazil Data Cube Explorer: [https://data.inpe.br/bdc/explorer/](https://data.inpe.br/bdc/explorer/)
+
+Dados tabulares:
+  
+- Kaggle datasets: [https://www.kaggle.com/datasets](https://www.kaggle.com/datasets)
+  
+- UCI Machine Learing Dataset collection: [https://archive.ics.uci.edu/](https://archive.ics.uci.edu/)
+    
+
+
+    
